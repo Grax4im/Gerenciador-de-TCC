@@ -1,5 +1,4 @@
 package models;
-
 public class Aluno {
     private String nome, email, telefone;
     private int matricula;
@@ -43,8 +42,7 @@ public class Aluno {
     public String toString() {
         return "Aluno:" + this.nome + "\nMatricula:" + this.matricula + 
                 "\nEmail:" + this.email + "\nTelefone:" + this.telefone; 
-    }
-    
+    }   
     public boolean copy(Aluno novoAluno) {
         this.nome= novoAluno.nome;
         this.matricula = novoAluno.matricula;

@@ -3,7 +3,6 @@ import DAO.DAOpropostaTC;
 import models.PropostaTC;
 public class ConsultaPropostaTC extends javax.swing.JInternalFrame {
     DAOpropostaTC listaPropostaTC = new DAOpropostaTC();
-    
     public ConsultaPropostaTC() {
         initComponents();
     }
