@@ -1,9 +1,12 @@
 package sistematcc;
-
+import models.Professor;
+import DAO.DAOprofessor;
 public class CadastroProfessor extends javax.swing.JInternalFrame {
+    boolean orienter;
     public CadastroProfessor() {
         initComponents();
     }
+    DAOprofessor listaProfessores = new DAOprofessor();
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -29,6 +32,12 @@ public class CadastroProfessor extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nome:");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Email:");
 
         jLabel3.setText("Área de interesse:");
@@ -38,10 +47,25 @@ public class CadastroProfessor extends javax.swing.JInternalFrame {
         jButton1.setText("Cancelar");
 
         jButton2.setText("Cadastrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jRadioButton1.setText("Orientador");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         jRadioButton2.setText("Não orientador");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,6 +127,31 @@ public class CadastroProfessor extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String nome = jTextField1.getText();
+        String email = jTextField2.getText();
+        String area = jTextField3.getText();
+        String sugestao = jTextField4.getText();
+        //esse booleano tá só pra teste... não sei mexer com esse componente 
+        //(pesquisar)
+        boolean orientador = true;
+        // ----- ------ 
+        Professor novoProfessor = new Professor(nome,email,area,sugestao,orientador);
+        listaProfessores.add(novoProfessor);
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        orienter = true;
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        orienter = false;
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

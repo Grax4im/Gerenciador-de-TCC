@@ -2,6 +2,7 @@ package DAO;
 import models.Aluno;
 public class DAOaluno extends DAO<Aluno>{
     
+    @Override
     public boolean update(Aluno object, Aluno newObject) {
         return object.copy(newObject);
     }
@@ -9,9 +10,9 @@ public class DAOaluno extends DAO<Aluno>{
     //search student by Name
     @Override
     public Aluno search(String name) {
-        for(int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getNome().equals(name)) {
-                return lista.get(i);
+        for(Aluno i : lista) {
+            if (i.getNome().equals(name)) {
+                return i;
             }
         }
         //if don't match...
@@ -19,9 +20,9 @@ public class DAOaluno extends DAO<Aluno>{
     }
     //search student by Matricula
     public Aluno search(int matricula) {
-        for(int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getMatricula() == matricula) {
-                return lista.get(i);
+        for(Aluno i : lista) {
+            if (i.getMatricula() == matricula) {
+                return i;
             }
         }
         //if don't match...

@@ -41,7 +41,7 @@ public class ConsultaAvaliacao extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Consulta de aluno");
+        setTitle("Consulta de Avaliação");
 
         jLabel2.setText("Matrícula:");
 

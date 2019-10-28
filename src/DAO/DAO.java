@@ -20,6 +20,6 @@ public abstract class DAO<Object> {
     // Como implementar a atualização? 
     // (Utilizar getters e setters de cada Objeto)
     public boolean update(Object object, Object newObject) {
-        return true;
+       return false;
     }
 }

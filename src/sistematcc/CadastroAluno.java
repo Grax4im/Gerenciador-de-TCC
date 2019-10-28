@@ -1,10 +1,14 @@
 package sistematcc;
+import DAO.*;
+import models.*;
 
 public class CadastroAluno extends javax.swing.JInternalFrame {
 
     public CadastroAluno() {
         initComponents();
     }
+    
+    DAOaluno listaAlunos = new DAOaluno();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -50,6 +54,11 @@ public class CadastroAluno extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Cadastrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,8 +121,20 @@ public class CadastroAluno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //pega os valores dos campos e guarda em variaveis
+        String nome = jTextField1.getText();
+        String matricula = jTextField2.getText();
+        String email = jTextField3.getText();
+        String telefone = jTextField4.getText();
+        //cria um objeto com as variaveis guardadas acima
+        Aluno novoAluno = new Aluno(nome, Integer.parseInt(matricula), email, telefone);
+        //Insere esse objeto na lista de alunos
+        listaAlunos.add(novoAluno);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

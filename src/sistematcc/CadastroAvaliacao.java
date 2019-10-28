@@ -22,7 +22,7 @@ public class CadastroAvaliacao extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Cadastro de aluno");
+        setTitle("Cadastro de Avaliações");
 
         jLabel1.setText("Nome:");
 
