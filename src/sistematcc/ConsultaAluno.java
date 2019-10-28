@@ -144,7 +144,12 @@ public class ConsultaAluno extends javax.swing.JInternalFrame {
         int matricula = Integer.parseInt(campoMatricula.getText());
         //a classe DAO pesquisa a matricula do aluno e retorna o aluno
         Aluno alunoEncontrado = listaAlunos.search(matricula);
-        System.out.println(alunoEncontrado.toString());
+        if (alunoEncontrado == null) {
+            System.out.println("Aluno não encontrado");
+        }
+        else {
+            System.out.println(alunoEncontrado.toString());
+        }
     }//GEN-LAST:event_pesquisarMatriculaActionPerformed
 
     private void campoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMatriculaActionPerformed

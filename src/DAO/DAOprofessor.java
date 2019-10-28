@@ -1,7 +1,5 @@
 package DAO;
-
 import models.Professor;
-
 public class DAOprofessor extends DAO<Professor>{ 
     
     @Override
