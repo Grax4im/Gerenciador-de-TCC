@@ -1,15 +1,15 @@
 package sistematcc;
+import DAO.DAOaluno;
+import DAO.DAOprofessor;
 public class TelaInicial extends javax.swing.JFrame {
-    CadastroAluno ca = null;
-    ConsultaAluno coa = null;
-    CadastroProfessor cp = null;
-    ConsultaProfessor cop = null;
-    CadastroPropostaTC cpt = null;
-    ConsultaPropostaTC copt = null;
+    
+    DAOaluno listaAlunos = new DAOaluno();
+    DAOprofessor listaProfessores = new DAOprofessor();
     
     public TelaInicial() {
         initComponents();
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -141,37 +141,37 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5MouseClicked
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-            ca = new CadastroAluno();
+            CadastroAluno ca = new CadastroAluno(listaAlunos);
             ca.setVisible(true);
             this.add(ca);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-            cp = new CadastroProfessor();
+            CadastroProfessor cp = new CadastroProfessor(listaProfessores);
             cp.setVisible(true);
             this.add(cp);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-            cpt = new CadastroPropostaTC();
+            CadastroPropostaTC cpt = new CadastroPropostaTC();
             cpt.setVisible(true);
             this.add(cpt);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-            coa = new ConsultaAluno();
+            ConsultaAluno coa = new ConsultaAluno(listaAlunos);
             coa.setVisible(true);
             this.add(coa);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-            cop = new ConsultaProfessor();
+            ConsultaProfessor cop = new ConsultaProfessor(listaProfessores);
             cop.setVisible(true);
             this.add(cop);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-            copt = new ConsultaPropostaTC();
+            ConsultaPropostaTC copt = new ConsultaPropostaTC();
             copt.setVisible(true);
             this.add(copt);
     }//GEN-LAST:event_jMenuItem10ActionPerformed

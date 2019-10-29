@@ -2,10 +2,13 @@ package sistematcc;
 import DAO.DAOaluno;
 import models.Aluno;
 public class ConsultaAluno extends javax.swing.JInternalFrame {
-    public ConsultaAluno() {
+    
+    DAOaluno listaAlunos;
+    
+    public ConsultaAluno(DAOaluno listaAlunos) {
         initComponents();
+        this.listaAlunos = listaAlunos;
     }
-    DAOaluno listaAlunos = new DAOaluno();
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

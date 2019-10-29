@@ -2,11 +2,16 @@ package sistematcc;
 import models.Professor;
 import DAO.DAOprofessor;
 public class CadastroProfessor extends javax.swing.JInternalFrame {
+    
+    DAOprofessor listaProfessores;
+    //gambiarra
     boolean orienter;
-    public CadastroProfessor() {
+    
+    public CadastroProfessor(DAOprofessor listaProfessores) {
         initComponents();
+        this.listaProfessores = listaProfessores;
     }
-    DAOprofessor listaProfessores = new DAOprofessor();
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

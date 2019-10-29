@@ -4,11 +4,12 @@ import models.*;
 
 public class CadastroAluno extends javax.swing.JInternalFrame {
 
-    public CadastroAluno() {
-        initComponents();
-    }
+    DAOaluno listaAlunos;
     
-    DAOaluno listaAlunos = new DAOaluno();
+    public CadastroAluno(DAOaluno listaAlunos) {
+        initComponents();
+        this.listaAlunos = listaAlunos;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -117,7 +118,6 @@ public class CadastroAluno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -135,7 +135,6 @@ public class CadastroAluno extends javax.swing.JInternalFrame {
         //Insere esse objeto na lista de alunos
         listaAlunos.add(novoAluno);
     }//GEN-LAST:event_jButton2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
