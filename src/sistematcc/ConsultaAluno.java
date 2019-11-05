@@ -3,7 +3,7 @@ import DAO.DAOaluno;
 import models.Aluno;
 public class ConsultaAluno extends javax.swing.JInternalFrame {
     
-    DAOaluno listaAlunos;
+    private DAOaluno listaAlunos;
     
     public ConsultaAluno(DAOaluno listaAlunos) {
         initComponents();

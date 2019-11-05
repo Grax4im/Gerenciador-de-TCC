@@ -1,10 +1,10 @@
 package sistematcc;
-import DAO.DAOaluno;
-import DAO.DAOprofessor;
+import DAO.*;
 public class TelaInicial extends javax.swing.JFrame {
     
-    DAOaluno listaAlunos = new DAOaluno();
-    DAOprofessor listaProfessores = new DAOprofessor();
+    private final DAOaluno listaAlunos = new DAOaluno();
+    private final DAOBancaAvaliadora listaBancas = new DAOBancaAvaliadora();
+    private final DAOprofessor listaProfessores = new DAOprofessor();
     
     public TelaInicial() {
         initComponents();
@@ -18,11 +18,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        cadastroBanca = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        consultaBanca = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -50,8 +50,13 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem9.setText("Avaliação");
         jMenu1.add(jMenuItem9);
 
-        jMenuItem8.setText("Banca Avaliadora");
-        jMenu1.add(jMenuItem8);
+        cadastroBanca.setText("Banca Avaliadora");
+        cadastroBanca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroBancaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(cadastroBanca);
 
         jMenuItem6.setText("Professor");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +79,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Consulta");
+        consultaBanca.setText("Consulta");
 
         jMenuItem1.setText("Aluno");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,10 +87,10 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        consultaBanca.add(jMenuItem1);
 
         jMenuItem2.setText("Avaliação");
-        jMenu2.add(jMenuItem2);
+        consultaBanca.add(jMenuItem2);
 
         jMenuItem3.setText("Banca avaliadora");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +98,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        consultaBanca.add(jMenuItem3);
 
         jMenuItem4.setText("Professor");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +106,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        consultaBanca.add(jMenuItem4);
 
         jMenuItem10.setText("Proposta de TC");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
@@ -109,12 +114,12 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem10);
+        consultaBanca.add(jMenuItem10);
 
         jMenuItem11.setText("Sugestão de TC");
-        jMenu2.add(jMenuItem11);
+        consultaBanca.add(jMenuItem11);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(consultaBanca);
 
         setJMenuBar(jMenuBar1);
 
@@ -133,7 +138,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+        ConsultaBancaAvaliadora coba = new ConsultaBancaAvaliadora(listaBancas);
+        coba.setVisible(true);
+        this.add(coba);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
@@ -176,6 +183,12 @@ public class TelaInicial extends javax.swing.JFrame {
             this.add(copt);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void cadastroBancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroBancaActionPerformed
+        CadastroBancaAvaliadora cba = new CadastroBancaAvaliadora(listaBancas, listaProfessores);
+        cba.setVisible(true);
+        this.add(cba);
+    }//GEN-LAST:event_cadastroBancaActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -210,8 +223,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cadastroBanca;
+    private javax.swing.JMenu consultaBanca;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -223,7 +237,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

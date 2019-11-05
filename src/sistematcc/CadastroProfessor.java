@@ -1,11 +1,12 @@
 package sistematcc;
 import models.Professor;
 import DAO.DAOprofessor;
+import javax.swing.JOptionPane;
 public class CadastroProfessor extends javax.swing.JInternalFrame {
     
-    DAOprofessor listaProfessores;
+    private DAOprofessor listaProfessores;
     //gambiarra
-    boolean orienter;
+    private boolean orienter;
     
     public CadastroProfessor(DAOprofessor listaProfessores) {
         initComponents();
@@ -24,7 +25,6 @@ public class CadastroProfessor extends javax.swing.JInternalFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -48,8 +48,6 @@ public class CadastroProfessor extends javax.swing.JInternalFrame {
         jLabel3.setText("Área de interesse:");
 
         jLabel4.setText("Sugestão de projeto:");
-
-        jButton1.setText("Cancelar");
 
         jButton2.setText("Cadastrar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -96,9 +94,7 @@ public class CadastroProfessor extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,17 +119,16 @@ public class CadastroProfessor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //guarda os Inputs nas variaveis
         String nome = jTextField1.getText();
         String email = jTextField2.getText();
         String area = jTextField3.getText();
@@ -141,9 +136,23 @@ public class CadastroProfessor extends javax.swing.JInternalFrame {
         //esse booleano tá só pra teste... não sei mexer com esse componente 
         //(pesquisar)
         boolean orientador = true;
-        // ----- ------ 
-        Professor novoProfessor = new Professor(nome,email,area,sugestao,orientador);
-        listaProfessores.add(novoProfessor);
+        
+        //verifica se existe algum input vazio
+        if(nome.isEmpty() || email.isEmpty() || area.isEmpty() || sugestao.isEmpty()) {
+            mensagem("Por gentileza, é necessário preencher todos os campos");
+        }
+        else {
+            if(listaProfessores.search(nome) != null) {
+                mensagem("Lamento :( mas já existe um professor cadastrado com esse nome.\n"
+                        + "Você pode diferenciar o nome?");
+            }
+            else {
+                Professor novoProfessor = new Professor(nome,email,area,sugestao,orientador);
+                listaProfessores.add(novoProfessor);
+                mensagem("Professor " +nome+ " cadastrado com sucesso");
+                this.setVisible(false);
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
     
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -158,8 +167,10 @@ public class CadastroProfessor extends javax.swing.JInternalFrame {
         orienter = false;
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
+    public void mensagem(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
+    } 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

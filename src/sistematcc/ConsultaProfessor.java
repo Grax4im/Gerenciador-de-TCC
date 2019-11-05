@@ -4,7 +4,7 @@ import models.Professor;
 
 public class ConsultaProfessor extends javax.swing.JInternalFrame {
     
-    DAOprofessor listaProfessores;
+    private DAOprofessor listaProfessores;
     
     public ConsultaProfessor(DAOprofessor listaProfessores) {
         initComponents();
@@ -82,7 +82,7 @@ public class ConsultaProfessor extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(alterarProfessor)
