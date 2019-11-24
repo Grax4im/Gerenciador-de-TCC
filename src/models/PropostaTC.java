@@ -43,7 +43,6 @@ public class PropostaTC {
         this.titulo = newPropostaTC.getTitulo();
         this.autor = newPropostaTC.getAutor();
         this.orientador = newPropostaTC.getOrientador();
-        
         return true;
     }
 }
