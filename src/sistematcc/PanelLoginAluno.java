@@ -5,13 +5,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-public class loginAluno extends JPanel{
+public class PanelLoginAluno extends JPanel{
     
     JButton confirmar;
     JLabel labelNome, labelMatricula;
     JTextField campoNome, campoMatricula;
     
-    public loginAluno() {
+    public PanelLoginAluno() {
         confirmar = new JButton("Entrar");
         labelNome = new JLabel("Nome");
         labelMatricula = new JLabel("Matricula");

@@ -19,7 +19,7 @@ public class frame extends JFrame{
     private final loginAlunos loginAlunos = new loginAlunos();
     private final loginProfessores loginProfessores = new loginProfessores();
     private final loginAdmin loginAdmin = new loginAdmin();
-    private PainelSugestoes painelSugestoes;
+    private PanelSugestoes painelSugestoes;
    
     /*variaveis do primeiro JPanel*/
     private final JPanel escolherUsuario = new JPanel();
@@ -39,7 +39,7 @@ public class frame extends JFrame{
     
     public void initComponents(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600,300);
+        this.setSize(600,500);
     }
     
     /*Métodos para Criação de JPanel*/
@@ -55,16 +55,18 @@ public class frame extends JFrame{
         this.setVisible(true);
     }
     public void criarLoginAluno() {
-        loginAluno loginAluno = new loginAluno();
+        PanelLoginAluno loginAluno = new PanelLoginAluno();
         JButton botaoConfirmar = loginAluno.getBotaoConfirmar();
         confirmarLoginAlunos = new confirmarLoginAlunos(loginAluno);
         botaoConfirmar.addActionListener(confirmarLoginAlunos);
         this.add(loginAluno);
     }
     public void criarPainelSugestoes() {
-        painelSugestoes = new PainelSugestoes(listaProfessores);
+        painelSugestoes = new PanelSugestoes(listaProfessores);
         this.add(painelSugestoes);
     }
+    
+    
    
     /*CLASSES INTERNAS*/
     private class loginAlunos implements ActionListener{
@@ -95,9 +97,9 @@ public class frame extends JFrame{
     existe no DAOaluno
     */
     private class confirmarLoginAlunos implements ActionListener {
-        loginAluno loginAluno;
+        PanelLoginAluno loginAluno;
         
-        confirmarLoginAlunos(loginAluno loginAluno){
+        confirmarLoginAlunos(PanelLoginAluno loginAluno){
             this.loginAluno = loginAluno;
         }
         @Override
