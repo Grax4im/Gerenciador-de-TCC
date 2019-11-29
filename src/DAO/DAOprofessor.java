@@ -1,4 +1,5 @@
 package DAO;
+import java.util.ArrayList;
 import models.Professor;
 public class DAOprofessor extends DAO<Professor>{ 
     
@@ -17,5 +18,9 @@ public class DAOprofessor extends DAO<Professor>{
         }
         //if don't match...
         return null;
+    }
+    
+    public ArrayList<Professor> getLista() {
+        return lista;
     }
 }
