@@ -1,12 +1,14 @@
 package sistematcc;
 import DAO.DAOprofessor;
+import javax.swing.JButton;
+import javax.swing.JTable;
 import models.Professor;
 import models.tableModel;
 
 public class PanelSugestoes extends javax.swing.JPanel {
-    
-    DAOprofessor listaProfessores;
-    tableModel tableModel;
+    private Professor professorSelecionado;
+    private DAOprofessor listaProfessores;
+    private tableModel tableModel;
     
     public PanelSugestoes(DAOprofessor listaProfessores) {
         this.tableModel = new tableModel();
@@ -18,7 +20,9 @@ public class PanelSugestoes extends javax.swing.JPanel {
     /*Este método percorre toda a lista de professores e coloca seus dados na tabela*/
     public void popularTabela() {
         for(Professor i : listaProfessores.getLista()) {
-            tableModel.addRow(i);
+            if(i.isOrientador()) {
+                tableModel.addRow(i);
+            }
         }
     }
     @SuppressWarnings("unchecked")
@@ -42,6 +46,11 @@ public class PanelSugestoes extends javax.swing.JPanel {
         }
 
         escolherProfessor.setText("Escolher Professor como Orientador");
+        escolherProfessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escolherProfessorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -72,6 +81,31 @@ public class PanelSugestoes extends javax.swing.JPanel {
                 .addContainerGap(105, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void escolherProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escolherProfessorActionPerformed
+        int linha = tabelaProfessores.getSelectedRow();
+        if(linha != -1) {
+            Object nome = tableModel.getValueAt(linha, 0);
+            professorSelecionado = listaProfessores.search((String)nome);
+            professorSelecionado.setOrientador(false);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_escolherProfessorActionPerformed
+
+    public JButton getEscolherProfessor() {
+        return escolherProfessor;
+    }
+    
+    public Professor getProfessorSelecionado() {
+        return professorSelecionado;
+    }
+    
+    public JTable getTabelaProfessores() {
+        return tabelaProfessores;
+    }
+    public tableModel getTableModel() {
+        return tableModel;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton escolherProfessor;

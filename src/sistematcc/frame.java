@@ -7,14 +7,22 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import DAO.*;
+import javax.swing.JTable;
+import models.*;
 
 public class frame extends JFrame{
+    
+    /*Guarda no frame o objeto do aluno logado 
+    e do professor que vai orienta-lo*/
+    private Aluno alunoLogado;
+    private Professor professorSelecionado;
     
     /*Classes DAO*/
     private DAOaluno listaAlunos;
     private DAOprofessor listaProfessores;
     
     /*instancia das classes auxiliares*/
+    private final escolherProfessor escolherProfessor = new escolherProfessor();
     private confirmarLoginAlunos confirmarLoginAlunos;
     private final loginAlunos loginAlunos = new loginAlunos();
     private final loginProfessores loginProfessores = new loginProfessores();
@@ -61,14 +69,19 @@ public class frame extends JFrame{
         botaoConfirmar.addActionListener(confirmarLoginAlunos);
         this.add(loginAluno);
     }
-    public void criarPainelSugestoes() {
+    public void criarPainelSugestoes(String nome) {
+        alunoLogado = listaAlunos.search(nome);
         painelSugestoes = new PanelSugestoes(listaProfessores);
+        JButton botaoEscolherProfessor = painelSugestoes.getEscolherProfessor();
+        botaoEscolherProfessor.addActionListener(escolherProfessor);
         this.add(painelSugestoes);
     }
-    
-    
-   
-    /*CLASSES INTERNAS*/
+    public void criarPanelPropostaTC() {
+        professorSelecionado = escolherProfessor.getProfessorSelecionado();
+        PanelDefinicaoOrientadorTema panelProposta = new PanelDefinicaoOrientadorTema(alunoLogado, professorSelecionado);
+        this.add(panelProposta);
+    }
+    /*CLASSES AUXILIARES - ActionListeners */
     private class loginAlunos implements ActionListener{
 
         @Override
@@ -111,7 +124,7 @@ public class frame extends JFrame{
             if(listaAlunos.search(nome) != null){
                 if (listaAlunos.search(matricula) != null) {
                     loginAluno.setVisible(false);
-                    criarPainelSugestoes();
+                    criarPainelSugestoes(nome);
                 }
                 else {
                     //matricula errada...
@@ -120,6 +133,27 @@ public class frame extends JFrame{
             else {
                 //login errado...
             }
+        }
+    }
+  
+    private class escolherProfessor implements ActionListener {
+       
+       private Professor professorSelecionado;
+       @Override
+        public void actionPerformed(ActionEvent ae) {
+            JTable tabela = painelSugestoes.getTabelaProfessores();
+            tableModel modelo = painelSugestoes.getTableModel();
+            if(tabela.getSelectedRow() != -1) {
+                Object nome = modelo.getValueAt(tabela.getSelectedRow(), 0);
+                professorSelecionado = listaProfessores.search((String)nome);
+                professorSelecionado.setOrientador(false);
+                painelSugestoes.setVisible(false);
+                criarPanelPropostaTC();
+            }
+
+        }    
+        public Professor getProfessorSelecionado() {
+                return professorSelecionado;
         }
     }
   

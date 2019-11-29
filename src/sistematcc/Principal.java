@@ -15,7 +15,7 @@ public class Principal{
         listaProfessores.add(new Professor("Karen","javakaren@gmail.com", 
                 "Educação Maker", "Java", true));
        listaProfessores.add(new Professor("João","joaodasilva@gmail.com", 
-                "Fintechs", "RUby", true));
+                "Fintechs", "RUby", false));
        listaProfessores.add(new Professor("Marcio","marciogamer@gmail.com", 
                 "Gamificação do Ensino", "C", true));
         
