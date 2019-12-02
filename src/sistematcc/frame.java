@@ -1,11 +1,8 @@
 package sistematcc;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import DAO.*;
 import javax.swing.JTable;
 import models.*;
@@ -20,27 +17,26 @@ public class frame extends JFrame{
     /*Classes DAO*/
     private DAOaluno listaAlunos;
     private DAOprofessor listaProfessores;
+    private DAOpropostaTC listaPropostas;
     
     /*instancia das classes auxiliares*/
     private final escolherProfessor escolherProfessor = new escolherProfessor();
     private confirmarLoginAlunos confirmarLoginAlunos;
     private final loginAlunos loginAlunos = new loginAlunos();
     private final loginProfessores loginProfessores = new loginProfessores();
-    private final loginAdmin loginAdmin = new loginAdmin();
     private PanelSugestoes painelSugestoes;
-   
-    /*variaveis do primeiro JPanel*/
-    private final JPanel escolherUsuario = new JPanel();
-    private final JButton botaoAluno = new JButton("Sou Aluno");
-    private final JButton botaoProfessor = new JButton("Sou Professor");
-    private final JButton botaoAdmin = new JButton("Sou Administrador");
+    private final propostaEnviada propostaEnviada = new propostaEnviada();
+    
+    private PanelDefinicaoOrientadorTema panelProposta;
+    private PanelWhoAmI primeiroPainel;
     
 
     /*Inicializadores do frame*/
-    public frame(DAOaluno listaAlunos, DAOprofessor listaProfessores) {
+    public frame(DAOaluno listaAlunos, DAOprofessor listaProfessores, DAOpropostaTC listaPropostas) {
         super("Gerenciador de TCC");
         this.listaAlunos = listaAlunos;
         this.listaProfessores = listaProfessores;
+        this.listaPropostas = listaPropostas;
         initComponents();
         criarMenu();
     }
@@ -51,20 +47,18 @@ public class frame extends JFrame{
     }
     
     /*Métodos para Criação de JPanel*/
-    public void criarMenu() {
-        escolherUsuario.add(botaoAluno);
-        botaoAluno.addActionListener(loginAlunos);
-        escolherUsuario.add(botaoProfessor);
-        botaoProfessor.addActionListener(loginProfessores);
-        escolherUsuario.add(botaoAdmin);
-        botaoAdmin.addActionListener(loginAdmin);
-        escolherUsuario.setLayout(new FlowLayout());
-        this.add(escolherUsuario);
+    public void criarMenu(){
+        primeiroPainel = new PanelWhoAmI();
+        JButton souAluno = primeiroPainel.getSouAluno();
+        JButton souProfessor = primeiroPainel.getSouProfessor();
+        souAluno.addActionListener(loginAlunos);
+        souProfessor.addActionListener(loginProfessores);
+        this.add(primeiroPainel);
         this.setVisible(true);
     }
     public void criarLoginAluno() {
-        PanelLoginAluno loginAluno = new PanelLoginAluno();
-        JButton botaoConfirmar = loginAluno.getBotaoConfirmar();
+        PainelLoginAluno loginAluno = new PainelLoginAluno();
+        JButton botaoConfirmar = loginAluno.getConfirmar();
         confirmarLoginAlunos = new confirmarLoginAlunos(loginAluno);
         botaoConfirmar.addActionListener(confirmarLoginAlunos);
         this.add(loginAluno);
@@ -78,15 +72,19 @@ public class frame extends JFrame{
     }
     public void criarPanelPropostaTC() {
         professorSelecionado = escolherProfessor.getProfessorSelecionado();
-        PanelDefinicaoOrientadorTema panelProposta = new PanelDefinicaoOrientadorTema(alunoLogado, professorSelecionado);
+        panelProposta =
+            new PanelDefinicaoOrientadorTema(alunoLogado, professorSelecionado, listaPropostas);
         this.add(panelProposta);
+            JButton botaoConfirmar = panelProposta.getConfirmar();
+            botaoConfirmar.addActionListener(propostaEnviada);
+            
     }
     /*CLASSES AUXILIARES - ActionListeners */
     private class loginAlunos implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            escolherUsuario.setVisible(false);
+            primeiroPainel.setVisible(false);
             criarLoginAluno();
         }
     
@@ -94,15 +92,7 @@ public class frame extends JFrame{
     private class loginProfessores implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae) {
-            escolherUsuario.setVisible(false);
-        }
-    
-    }
-    private class loginAdmin implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            escolherUsuario.setVisible(false);
+            primeiroPainel.setVisible(false);
         }
     
     }
@@ -110,9 +100,9 @@ public class frame extends JFrame{
     existe no DAOaluno
     */
     private class confirmarLoginAlunos implements ActionListener {
-        PanelLoginAluno loginAluno;
+        PainelLoginAluno loginAluno;
         
-        confirmarLoginAlunos(PanelLoginAluno loginAluno){
+        confirmarLoginAlunos(PainelLoginAluno loginAluno){
             this.loginAluno = loginAluno;
         }
         @Override
@@ -136,8 +126,7 @@ public class frame extends JFrame{
         }
     }
   
-    private class escolherProfessor implements ActionListener {
-       
+    private class escolherProfessor implements ActionListener {     
        private Professor professorSelecionado;
        @Override
         public void actionPerformed(ActionEvent ae) {
@@ -150,11 +139,20 @@ public class frame extends JFrame{
                 painelSugestoes.setVisible(false);
                 criarPanelPropostaTC();
             }
-
         }    
         public Professor getProfessorSelecionado() {
                 return professorSelecionado;
         }
     }
-  
+    
+    private class propostaEnviada implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            alunoLogado = null;
+            professorSelecionado = null;
+            panelProposta.setVisible(false);
+            primeiroPainel.setVisible(true);
+        }
+    }
 }

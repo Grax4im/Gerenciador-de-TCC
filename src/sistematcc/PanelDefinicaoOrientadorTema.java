@@ -1,22 +1,34 @@
 package sistematcc;
 
+import DAO.DAOpropostaTC;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import models.Aluno;
 import models.Professor;
+import models.PropostaTC;
 
 public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
 
-    Aluno aluno;
-    Professor professor;
+    private Aluno aluno;
+    private Professor professor;
+    private DAOpropostaTC listaPropostas;
     
-    public PanelDefinicaoOrientadorTema(Aluno alunoLogado, Professor professorSelecionado) {
+    public PanelDefinicaoOrientadorTema(Aluno alunoLogado, Professor professorSelecionado, DAOpropostaTC proposta) {
         this.aluno = alunoLogado;
         this.professor = professorSelecionado;
+        this.listaPropostas = proposta;
         initComponents();
         nomeAluno.setText(aluno.getNome());
+        nomeAluno.setEditable(false);
         matriculaAluno.setText(Integer.toString(aluno.getMatricula()));
+        matriculaAluno.setEditable(false);
         telefoneAluno.setText(aluno.getTelefone());
+        telefoneAluno.setEditable(false);
         emailAluno.setText(aluno.getEmail());
+        emailAluno.setEditable(false);
         nomeOrientador.setText(professor.getNome());
+        nomeOrientador.setEditable(false);
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -30,7 +42,7 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        confirmar = new javax.swing.JButton();
         temaDoTCC = new javax.swing.JTextField();
         telefoneAluno = new javax.swing.JTextField();
         nomeOrientador = new javax.swing.JTextField();
@@ -52,10 +64,10 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
 
         jLabel7.setText("Orientador:");
 
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        confirmar.setText("Confirmar");
+        confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                confirmarActionPerformed(evt);
             }
         });
 
@@ -126,7 +138,7 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nomeOrientador)
                         .addGap(26, 26, 26)
-                        .addComponent(jButton1)
+                        .addComponent(confirmar)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 109, Short.MAX_VALUE)
@@ -163,14 +175,14 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nomeOrientador, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(confirmar))
                 .addGap(23, 23, 23))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
+        criarPropostaTC();
+    }//GEN-LAST:event_confirmarActionPerformed
 
     private void telefoneAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneAlunoActionPerformed
         // TODO add your handling code here:
@@ -192,10 +204,19 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeAlunoActionPerformed
 
+    private void criarPropostaTC() {
+        PropostaTC novaProposta = new PropostaTC(temaDoTCC.getText(), aluno, professor);
+        if(listaPropostas.add(novaProposta)) {
+            JOptionPane.showMessageDialog(null, "Sua Proposta foi enviada ao Professor !");
+        }
+    }
 
+    public JButton getConfirmar() {
+        return confirmar;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton confirmar;
     private javax.swing.JTextField emailAluno;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

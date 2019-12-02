@@ -18,8 +18,10 @@ public class Principal{
                 "Fintechs", "RUby", false));
        listaProfessores.add(new Professor("Marcio","marciogamer@gmail.com", 
                 "Gamificação do Ensino", "C", true));
+       
+       DAOpropostaTC listaPropostas = new DAOpropostaTC();
         
         /*cria o JFrame e passa a lista pra ele*/
-        frame frame = new frame(listaAlunos, listaProfessores);
+        frame frame = new frame(listaAlunos, listaProfessores, listaPropostas);
     }
 }
