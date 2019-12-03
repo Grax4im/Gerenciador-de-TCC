@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import DAO.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import models.*;
 
@@ -18,25 +20,35 @@ public class frame extends JFrame{
     private DAOaluno listaAlunos;
     private DAOprofessor listaProfessores;
     private DAOpropostaTC listaPropostas;
+    private DAOBancaAvaliadora listaBancas;
     
     /*instancia das classes auxiliares*/
+    private final adicionarProfessor adicionarProfessor = new adicionarProfessor();
     private final escolherProfessor escolherProfessor = new escolherProfessor();
     private confirmarLoginAlunos confirmarLoginAlunos;
     private final loginAlunos loginAlunos = new loginAlunos();
     private final loginProfessores loginProfessores = new loginProfessores();
-    private PanelSugestoes painelSugestoes;
+    private PanelProfessores painelSugestoes;
     private final propostaEnviada propostaEnviada = new propostaEnviada();
+    private final confirmarLoginProfessor confirmarLoginProfessor = new confirmarLoginProfessor();
+    private final auxiliarGerarRelatorio auxiliarGerarRelatorio = new auxiliarGerarRelatorio();
     
     private PanelDefinicaoOrientadorTema panelProposta;
     private PanelWhoAmI primeiroPainel;
+    private PanelPropostasTC panelPropostasTC;
+    private PanelLoginProfessor PanelLoginProfessor;
+    private PanelRelatorio panelRelatorio;
+    private PanelFormularioAvaliacao formularioAvaliacao;
     
 
     /*Inicializadores do frame*/
-    public frame(DAOaluno listaAlunos, DAOprofessor listaProfessores, DAOpropostaTC listaPropostas) {
+    public frame(DAOaluno listaAlunos, DAOprofessor listaProfessores, DAOpropostaTC listaPropostas
+    , DAOBancaAvaliadora listaBancas) {
         super("Gerenciador de TCC");
         this.listaAlunos = listaAlunos;
         this.listaProfessores = listaProfessores;
         this.listaPropostas = listaPropostas;
+        this.listaBancas = listaBancas;
         initComponents();
         criarMenu();
     }
@@ -65,7 +77,7 @@ public class frame extends JFrame{
     }
     public void criarPainelSugestoes(String nome) {
         alunoLogado = listaAlunos.search(nome);
-        painelSugestoes = new PanelSugestoes(listaProfessores);
+        painelSugestoes = new PanelProfessores(listaProfessores);
         JButton botaoEscolherProfessor = painelSugestoes.getEscolherProfessor();
         botaoEscolherProfessor.addActionListener(escolherProfessor);
         this.add(painelSugestoes);
@@ -78,6 +90,64 @@ public class frame extends JFrame{
             JButton botaoConfirmar = panelProposta.getConfirmar();
             botaoConfirmar.addActionListener(propostaEnviada);
             
+    }
+    public void criarPanelLoginProfessor() {
+        PanelLoginProfessor = new PanelLoginProfessor();
+        JButton botaoConfirmar = PanelLoginProfessor.getConfirmar();
+        botaoConfirmar.addActionListener(confirmarLoginProfessor);
+        this.add(PanelLoginProfessor);
+    }
+    
+    public void criarPanelListaPropostas() {
+        panelPropostasTC = new PanelPropostasTC(listaPropostas);
+        JButton botaoConfirmar = panelPropostasTC.getEscolherPropsota();
+        botaoConfirmar.addActionListener(auxiliarGerarRelatorio);
+        this.add(panelPropostasTC);
+    }
+    public void criarPanelRelatorio(ArrayList<Professor> relatorio) {
+        panelRelatorio = new PanelRelatorio(relatorio);
+        JButton confirmar = panelRelatorio.getEscolherProfessor();
+        confirmar.addActionListener(adicionarProfessor);
+        this.add(panelRelatorio);
+    }
+    public void criarBancaAvaliadora(ArrayList<Professor> banca) {
+        Professor primeiro = banca.get(0);
+        Professor segundo = banca.get(1);     
+        Professor terceiro = banca.get(2);
+
+        BancaAvaliadora bancaAvaliadora = new BancaAvaliadora(primeiro,segundo,terceiro);
+        if(listaBancas.add(bancaAvaliadora)) {
+            JOptionPane.showMessageDialog(null,"Banca Avaliadora Criada com Sucesso!");
+            JOptionPane.showMessageDialog(null,"E-mail enviado para todos os avaliadores");            
+            criarFormularioAvaliacao(bancaAvaliadora);
+        }
+    }
+    public void criarFormularioAvaliacao(BancaAvaliadora banca) {
+        formularioAvaliacao = new PanelFormularioAvaliacao(banca);
+        this.add(formularioAvaliacao);
+    }
+    
+    /*Gerar o relatório dos professores indicados para a proposta*/
+    public ArrayList<Professor> gerarRelatorio(PropostaTC proposta){
+        String areaProjeto = proposta.getAreaDoProjeto();
+        ArrayList<Professor> professoresArea = new ArrayList();
+        
+        for(Professor i: listaProfessores.getLista()) {
+            for(String j: i.getAreaDeInteresse()) {
+                if(j.equals(areaProjeto)) {
+                    professoresArea.add(i);
+                }
+            }
+        }
+        
+        if (professoresArea.size() < 4) {
+            for(Professor i : listaProfessores.getLista()) {
+                if(!professoresArea.contains(i) && professoresArea.size() < 4) {
+                    professoresArea.add(i);
+                }
+            }
+        }
+        return professoresArea;
     }
     /*CLASSES AUXILIARES - ActionListeners */
     private class loginAlunos implements ActionListener{
@@ -93,6 +163,7 @@ public class frame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             primeiroPainel.setVisible(false);
+            criarPanelLoginProfessor();
         }
     
     }
@@ -136,6 +207,7 @@ public class frame extends JFrame{
                 Object nome = modelo.getValueAt(tabela.getSelectedRow(), 0);
                 professorSelecionado = listaProfessores.search((String)nome);
                 professorSelecionado.setOrientador(false);
+                professorSelecionado.setCargaTrabalho();
                 painelSugestoes.setVisible(false);
                 criarPanelPropostaTC();
             }
@@ -155,4 +227,51 @@ public class frame extends JFrame{
             primeiroPainel.setVisible(true);
         }
     }
+    
+    private class confirmarLoginProfessor implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            String nome = PanelLoginProfessor.getCampoNome().getText();
+            String email = PanelLoginProfessor.getCampoEmail().getText();
+            if(listaProfessores.search(nome) != null) {
+                    criarPanelListaPropostas();
+                    PanelLoginProfessor.setVisible(false);
+            }
+        }
+    }
+    
+    private class auxiliarGerarRelatorio implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+                PropostaTC proposta = panelPropostasTC.getPropostaSelecionada();
+                ArrayList<Professor> relatorioProfessores = gerarRelatorio(proposta);
+                panelPropostasTC.setVisible(false);
+                criarPanelRelatorio(relatorioProfessores);
+            }
+        }
+    private class adicionarProfessor implements ActionListener {
+
+        ArrayList<Professor> professoresDaBanca = new ArrayList();
+        
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+               
+               Professor i = panelRelatorio.getProfessorSelecionado();
+               
+               if(!professoresDaBanca.contains(i)) {
+                professoresDaBanca.add(i);
+                JOptionPane.showMessageDialog(null, "Professor " + i.getNome() + " Adicionado a Banca");
+                if(professoresDaBanca.size() == 3) {
+                    criarBancaAvaliadora(professoresDaBanca);
+                    panelRelatorio.setVisible(false);
+                }
+               }
+               else {
+                   JOptionPane.showMessageDialog(null, "Professor " + i.getNome() + " Já faz parte da Banca");
+               }
+            }
+    }
+    
 }

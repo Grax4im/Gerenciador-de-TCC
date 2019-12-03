@@ -2,7 +2,7 @@ package models;
 import java.util.ArrayList;
 public class BancaAvaliadora {
     //array com 3 professores
-    private ArrayList<Professor> avaliador;
+    private ArrayList<Professor> avaliador = new ArrayList();
 
     public BancaAvaliadora() {}
     public BancaAvaliadora(Professor a) {
@@ -19,7 +19,7 @@ public class BancaAvaliadora {
         this.avaliador.add(c);
     }
 
-    public ArrayList<Professor> getAvaliador() {
+    public ArrayList<Professor> getAvaliadores() {
         return avaliador;
     }
 
@@ -28,7 +28,7 @@ public class BancaAvaliadora {
     }
     
     public boolean copy(BancaAvaliadora anotherObject) {
-        this.avaliador = anotherObject.getAvaliador();
+        this.avaliador = anotherObject.getAvaliadores();
         return true;
     }
     

@@ -1,4 +1,5 @@
 package DAO;
+import java.util.ArrayList;
 import models.PropostaTC;
 public class DAOpropostaTC extends DAO<PropostaTC>{
     
@@ -17,5 +18,8 @@ public class DAOpropostaTC extends DAO<PropostaTC>{
         }
         //if don't match...
         return null;
+    }
+    public ArrayList<PropostaTC> getLista() {
+        return lista;
     }
 }

@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 public class tableModel extends AbstractTableModel{
 
     List<Professor> dados = new ArrayList<>();
-    String[] colunas = {"Nome", "Area de Interesse", "Email"};
+    String[] colunas = {"Nome", "Area de Interesse", "Sugestão de Projeto", "Email"};
 
     @Override
     public String getColumnName(int coluna) {
@@ -31,8 +31,10 @@ public class tableModel extends AbstractTableModel{
                 case 0:
                     return dados.get(linha).getNome();
                 case 1:
-                    return dados.get(linha).getAreaDeInteresse();
+                    return dados.get(linha).getAreaDeInteresseString();
                 case 2:
+                    return dados.get(linha).getSugestao();
+                case 3:
                     return dados.get(linha).getEmail();
         }
         return null;

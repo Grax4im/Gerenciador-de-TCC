@@ -3,13 +3,19 @@ public class PropostaTC {
     private String titulo;
     private Aluno autor;
     private Professor orientador;
+    private String areaDoProjeto;
 
-    public PropostaTC(String titulo, Aluno autor, Professor orientador) {
+    public PropostaTC(String titulo, Aluno autor, Professor orientador, String area) {
         this.titulo = titulo;
         this.autor = autor;
         this.orientador = orientador;
+        this.areaDoProjeto = area;
     }
 
+    public String getAreaDoProjeto() {
+        return areaDoProjeto;
+    }
+    
     public String getTitulo() {
         return titulo;
     }
@@ -45,4 +51,5 @@ public class PropostaTC {
         this.orientador = newPropostaTC.getOrientador();
         return true;
     }
+    
 }

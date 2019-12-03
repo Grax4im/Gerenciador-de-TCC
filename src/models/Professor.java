@@ -1,14 +1,16 @@
 package models;
 
-public class Professor {
-    private String nome, email, areaDeInteresse, sugestao;
-    private boolean orientador;
+import java.util.ArrayList;
 
-    public Professor(String nome, String email, String areaDeInteresse, String Sugestao, boolean orientador) {
+public class Professor implements Comparable{
+    private String nome, email, sugestao;
+    private ArrayList<String> areaDeInteresse;
+    private boolean orientador;
+    private int cargaTrabalho;
+
+    public Professor(String nome, String email, boolean orientador) {
         this.nome = nome;
         this.email = email;
-        this.areaDeInteresse = areaDeInteresse;
-        this.sugestao = Sugestao;
         this.orientador = orientador;
     }
 
@@ -20,11 +22,22 @@ public class Professor {
         this.email = email;
     }
 
-    public String getAreaDeInteresse() {
+    public ArrayList<String> getAreaDeInteresse() {
         return areaDeInteresse;
     }
+    
+    public String getAreaDeInteresseString() {
+        String areaString = "";
+        for(String i: areaDeInteresse) {
+            if(areaString.isEmpty()) 
+                areaString = i;
+            else
+                areaString += "," + i;
+        }
+        return areaString;
+    }
 
-    public void setAreaDeInteresse(String areaDeInteresse) {
+    public void setAreaDeInteresse(ArrayList areaDeInteresse) {
         this.areaDeInteresse = areaDeInteresse;
     }
 
@@ -47,7 +60,13 @@ public class Professor {
     public String getNome() {
         return nome;
     }
-
+    
+    public void setCargaTrabalho() {
+        this.cargaTrabalho += 1;
+    }
+    public int getCargaTrabalho() {
+        return this.cargaTrabalho;
+    }
     
     public String simOuNao() {
         return isOrientador() ? "Sim" : "Não";
@@ -66,5 +85,18 @@ public class Professor {
         this.sugestao = newProfessor.getSugestao();
         this.orientador = newProfessor.isOrientador();
         return true;
+    }
+
+    @Override
+    public int compareTo(Object outroProfessor) {
+        Professor outroProf = (Professor)outroProfessor; 
+        if(this.cargaTrabalho < outroProf.getCargaTrabalho()) {
+            return -1;
+        }
+        if(this.cargaTrabalho > outroProf.getCargaTrabalho()) {
+            return 1;
+        }
+        
+        return 0;
     }
 }

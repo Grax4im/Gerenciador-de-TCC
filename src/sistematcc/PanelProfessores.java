@@ -5,12 +5,12 @@ import javax.swing.JTable;
 import models.Professor;
 import models.tableModel;
 
-public class PanelSugestoes extends javax.swing.JPanel {
+public class PanelProfessores extends javax.swing.JPanel {
     private Professor professorSelecionado;
     private DAOprofessor listaProfessores;
     private tableModel tableModel;
     
-    public PanelSugestoes(DAOprofessor listaProfessores) {
+    public PanelProfessores(DAOprofessor listaProfessores) {
         this.tableModel = new tableModel();
         initComponents();
         this.listaProfessores = listaProfessores; 
@@ -39,11 +39,6 @@ public class PanelSugestoes extends javax.swing.JPanel {
 
         tabelaProfessores.setModel(tableModel);
         jScrollPane1.setViewportView(tabelaProfessores);
-        if (tabelaProfessores.getColumnModel().getColumnCount() > 0) {
-            tabelaProfessores.getColumnModel().getColumn(0).setHeaderValue("Nome do Professor");
-            tabelaProfessores.getColumnModel().getColumn(1).setHeaderValue("Area de Interesse");
-            tabelaProfessores.getColumnModel().getColumn(2).setHeaderValue("E-mail");
-        }
 
         escolherProfessor.setText("Escolher Professor como Orientador");
         escolherProfessor.addActionListener(new java.awt.event.ActionListener() {

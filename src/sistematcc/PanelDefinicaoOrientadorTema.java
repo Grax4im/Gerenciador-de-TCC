@@ -28,7 +28,8 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
         emailAluno.setEditable(false);
         nomeOrientador.setText(professor.getNome());
         nomeOrientador.setEditable(false);
-        
+        temaDoTCC.setText(professor.getSugestao());
+        areaDoProjeto.setText(professor.getAreaDeInteresse().get(0));
     }
     
     @SuppressWarnings("unchecked")
@@ -49,6 +50,8 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
         emailAluno = new javax.swing.JTextField();
         matriculaAluno = new javax.swing.JTextField();
         nomeAluno = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        areaDoProjeto = new javax.swing.JTextField();
 
         jLabel1.setText("Definição Professor Orientador e Tema");
 
@@ -70,8 +73,6 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
                 confirmarActionPerformed(evt);
             }
         });
-
-        temaDoTCC.setText("jTextField1");
 
         telefoneAluno.setText("jTextField1");
         telefoneAluno.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +109,14 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
             }
         });
 
+        jLabel8.setText("Area do Projeto:");
+
+        areaDoProjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                areaDoProjetoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,35 +124,39 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 109, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(118, 118, 118))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(nomeOrientador)
+                        .addGap(26, 26, 26)
+                        .addComponent(confirmar)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(areaDoProjeto)
+                        .addGap(122, 122, 122))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(telefoneAluno)
                             .addComponent(temaDoTCC, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(telefoneAluno)
+                            .addComponent(matriculaAluno, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(emailAluno, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomeAluno, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(matriculaAluno, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(emailAluno, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomeAluno, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(197, 197, 197))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nomeOrientador)
-                        .addGap(26, 26, 26)
-                        .addComponent(confirmar)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 109, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(118, 118, 118))))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(197, 197, 197))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,21 +175,28 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(telefoneAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(emailAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(temaDoTCC, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeOrientador, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmar))
-                .addGap(23, 23, 23))
+                .addComponent(emailAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(temaDoTCC, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(areaDoProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(confirmar)
+                        .addGap(23, 23, 23))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nomeOrientador, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -204,8 +224,13 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeAlunoActionPerformed
 
+    private void areaDoProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaDoProjetoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_areaDoProjetoActionPerformed
+
     private void criarPropostaTC() {
-        PropostaTC novaProposta = new PropostaTC(temaDoTCC.getText(), aluno, professor);
+        PropostaTC novaProposta = new PropostaTC(temaDoTCC.getText(), aluno, 
+                professor, areaDoProjeto.getText());
         if(listaPropostas.add(novaProposta)) {
             JOptionPane.showMessageDialog(null, "Sua Proposta foi enviada ao Professor !");
         }
@@ -215,6 +240,7 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
         return confirmar;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField areaDoProjeto;
     private javax.swing.JButton confirmar;
     private javax.swing.JTextField emailAluno;
     private javax.swing.JLabel jLabel1;
@@ -224,6 +250,7 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField matriculaAluno;
     private javax.swing.JTextField nomeAluno;
     private javax.swing.JTextField nomeOrientador;
