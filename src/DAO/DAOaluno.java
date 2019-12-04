@@ -19,9 +19,9 @@ public class DAOaluno extends DAO<Aluno>{
         return null;
     }
     //search student by Matricula
-    public Aluno search(int matricula) {
+    public Aluno searchByMatricula(String matricula) {
         for(Aluno i : lista) {
-            if (i.getMatricula() == matricula) {
+            if (i.getMatricula().equals(matricula)) {
                 return i;
             }
         }

@@ -3,18 +3,17 @@ import java.io.Serializable;
 import java.util.Objects;
 public class Avaliacao implements Serializable{
     private Aluno aluno;
+    private Professor orientador;
     private Professor avaliador;
     private String titulo;
     private String parecer;
-    //aprovado ou reprovado
     private boolean avaliacao;
-    //caso aprovado, conceito de A até C (implementar enum)
     private String conceito;
 
-    public Avaliacao(Aluno aluno, Professor avaliador, String titulo, boolean avaliacao) {
-        this.aluno = aluno;
+    public Avaliacao(PropostaTC proposta,Professor avaliador, boolean avaliacao) {
+        this.aluno = proposta.getAutor();
         this.avaliador = avaliador;
-        this.titulo = titulo;
+        this.titulo = proposta.getTitulo();
         this.avaliacao = avaliacao;
     }
 
@@ -118,5 +117,4 @@ public class Avaliacao implements Serializable{
                 ", parecer=" + parecer + ", avaliacao=" + avaliacao +
                 ", conceito=" + conceito + '}';
     }
-   
 }

@@ -53,16 +53,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar Avalia&#xe7;&#xe3;o do Terceiro Avaliador"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="terceiroAvaliadorActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="primeiroAvaliador">
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar Avalia&#xe7;&#xe3;o do Segundo Avaliador"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="primeiroAvaliadorActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="segundoAvaliador">
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar Avalia&#xe7;&#xe3;o do Segundo Avaliador"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="segundoAvaliadorActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

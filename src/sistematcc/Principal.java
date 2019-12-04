@@ -8,11 +8,11 @@ public class Principal{
     public static void main(String[] args) {
         /*cria uma lista de alunos e adiciona 3 alunos*/
         DAOaluno listaAlunos = new DAOaluno();
-        Aluno robert = new Aluno("Robert", 1234, "robertsilveiracrust@gmail.com","1234");
+        Aluno robert = new Aluno("Robert", "1234", "robertsilveiracrust@gmail.com","1234");
         listaAlunos.add(robert);
-        Aluno ariane = new Aluno("Ariane", 5678, "ariane.huber@gmail.com","1234");
+        Aluno ariane = new Aluno("Ariane", "5678", "ariane.huber@gmail.com","1234");
         listaAlunos.add(ariane);
-        Aluno nicolas = new Aluno("Nicolas", 91011, "nicolas.coutinho@gmail.com","1234");
+        Aluno nicolas = new Aluno("Nicolas", "91011", "nicolas.coutinho@gmail.com","1234");
         listaAlunos.add(nicolas);  
         /*cria uma lista de professores e adiciona 3 professores*/
         DAOprofessor listaProfessores = new DAOprofessor();
@@ -51,7 +51,8 @@ public class Principal{
         listaPropostas.add(new PropostaTC("Maker", nicolas, karen,"Java"));
 
         DAOBancaAvaliadora listaBancas = new DAOBancaAvaliadora();
+        DAOavaliacao listaAvaliacoes = new DAOavaliacao();
         /*cria o JFrame e passa a lista pra ele*/
-        frame frame = new frame(listaAlunos, listaProfessores, listaPropostas, listaBancas);
+        frame frame = new frame(listaAlunos, listaProfessores, listaPropostas, listaBancas, listaAvaliacoes);
     }
 }

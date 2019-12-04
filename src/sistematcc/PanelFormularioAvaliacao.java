@@ -1,19 +1,40 @@
 package sistematcc;
 
+import java.util.ArrayList;
 import javax.swing.JButton;
+import models.Avaliacao;
+import models.Professor;
 import models.PropostaTC;
 
 public class PanelFormularioAvaliacao extends javax.swing.JPanel {
 
     PropostaTC banca; 
+    Professor avaliadorEscolhido;
     
     public PanelFormularioAvaliacao(PropostaTC banca) {
         initComponents();
         this.banca = banca;
+        escondeBotoes();
         primeiroAvaliador.setText("Adicionar Avaliação Prof. "+banca.getBancaAvaliadora().getAvaliadores().get(0).getNome());
         segundoAvaliador.setText("Adicionar Avaliação Prof. " + banca.getBancaAvaliadora().getAvaliadores().get(1).getNome());
         terceiroAvaliador.setText("Adicionar Avaliação Prof. " + banca.getBancaAvaliadora().getAvaliadores().get(2).getNome());
     }
+    public void escondeBotoes() {
+        ArrayList<Avaliacao> avaliacoes = banca.getBancaAvaliadora().getAvaliacoes();
+        for(Avaliacao i : avaliacoes){
+            if(i.getAvaliador() == banca.getBancaAvaliadora().getAvaliadores().get(0)){
+                primeiroAvaliador.setVisible(false);
+            }
+            if(i.getAvaliador() == banca.getBancaAvaliadora().getAvaliadores().get(1)){
+                segundoAvaliador.setVisible(false);
+            }
+            if(i.getAvaliador() == banca.getBancaAvaliadora().getAvaliadores().get(2)){
+                terceiroAvaliador.setVisible(false);
+            }
+        }
+    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -24,10 +45,25 @@ public class PanelFormularioAvaliacao extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         terceiroAvaliador.setText("Adicionar Avaliação do Terceiro Avaliador");
+        terceiroAvaliador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                terceiroAvaliadorActionPerformed(evt);
+            }
+        });
 
         primeiroAvaliador.setText("Adicionar Avaliação do Segundo Avaliador");
+        primeiroAvaliador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                primeiroAvaliadorActionPerformed(evt);
+            }
+        });
 
         segundoAvaliador.setText("Adicionar Avaliação do Segundo Avaliador");
+        segundoAvaliador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                segundoAvaliadorActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Aguardando a Avaliação da Banca");
@@ -62,6 +98,23 @@ public class PanelFormularioAvaliacao extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void primeiroAvaliadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primeiroAvaliadorActionPerformed
+        setAvaliadorEscolhido(0);
+    }//GEN-LAST:event_primeiroAvaliadorActionPerformed
+
+    private void segundoAvaliadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_segundoAvaliadorActionPerformed
+        setAvaliadorEscolhido(1);
+    }//GEN-LAST:event_segundoAvaliadorActionPerformed
+
+    private void terceiroAvaliadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terceiroAvaliadorActionPerformed
+        setAvaliadorEscolhido(2);
+    }//GEN-LAST:event_terceiroAvaliadorActionPerformed
+    public Professor getAvaliadorEscolhido(){
+        return avaliadorEscolhido;
+    }
+    public void setAvaliadorEscolhido(int i) {
+        avaliadorEscolhido = banca.getBancaAvaliadora().getAvaliadores().get(i);
+    }
     public JButton getPrimeiroAvaliador() {
         return primeiroAvaliador;
     }

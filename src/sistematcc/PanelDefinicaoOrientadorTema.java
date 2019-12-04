@@ -20,7 +20,7 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
         initComponents();
         nomeAluno.setText(aluno.getNome());
         nomeAluno.setEditable(false);
-        matriculaAluno.setText(Integer.toString(aluno.getMatricula()));
+        matriculaAluno.setText(aluno.getMatricula());
         matriculaAluno.setEditable(false);
         telefoneAluno.setText(aluno.getTelefone());
         telefoneAluno.setEditable(false);

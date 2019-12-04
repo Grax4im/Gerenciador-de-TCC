@@ -39,7 +39,7 @@ public class PanelWhoAmI extends javax.swing.JPanel {
             }
         });
 
-        souProfessor.setText("Sou Professor");
+        souProfessor.setText("Sou Professor da Disciplina");
         souProfessor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 souProfessorActionPerformed(evt);

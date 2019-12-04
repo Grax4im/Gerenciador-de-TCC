@@ -11,9 +11,4 @@ public class DAOavaliacao extends DAO<Avaliacao>{
         //se não encontrar
         return null;
     }
-
-    @Override
-    public boolean update(Avaliacao object, Avaliacao newObject) {
-        return object.copy(newObject);
-    }
 }

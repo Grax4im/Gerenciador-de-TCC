@@ -22,6 +22,7 @@ public class frame extends JFrame{
     private DAOprofessor listaProfessores;
     private DAOpropostaTC listaPropostas;
     private DAOBancaAvaliadora listaBancas;
+    private DAOavaliacao listaAvaliacoes;
     
     /*instancia das classes auxiliares*/
     private final adicionarProfessor adicionarProfessor = new adicionarProfessor();
@@ -33,7 +34,6 @@ public class frame extends JFrame{
     private final propostaEnviada propostaEnviada = new propostaEnviada();
     private final confirmarLoginProfessor confirmarLoginProfessor = new confirmarLoginProfessor();
     private final auxiliarGerarRelatorio auxiliarGerarRelatorio = new auxiliarGerarRelatorio();
-    private criarAvaliacao criarAvaliacao = new criarAvaliacao();
     
     private PanelDefinicaoOrientadorTema panelProposta;
     private PanelWhoAmI primeiroPainel;
@@ -41,18 +41,21 @@ public class frame extends JFrame{
     private PanelLoginProfessor PanelLoginProfessor;
     private PanelRelatorio panelRelatorio;
     private PanelFormularioAvaliacao formularioAvaliacao;
+    private PanelAvaliacao panelAvaliacao;
     
 
     /*Inicializadores do frame*/
     public frame(DAOaluno listaAlunos, DAOprofessor listaProfessores, DAOpropostaTC listaPropostas
-    , DAOBancaAvaliadora listaBancas) {
+    , DAOBancaAvaliadora listaBancas, DAOavaliacao listaAvaliacoes) {
         super("Gerenciador de TCC");
         this.listaAlunos = listaAlunos;
         this.listaProfessores = listaProfessores;
         this.listaPropostas = listaPropostas;
         this.listaBancas = listaBancas;
+        this.listaAvaliacoes = listaAvaliacoes;
         initComponents();
         criarMenu();
+        this.setVisible(true);
     }
     
     public void initComponents(){
@@ -68,9 +71,13 @@ public class frame extends JFrame{
         souAluno.addActionListener(loginAlunos);
         souProfessor.addActionListener(loginProfessores);
         this.add(primeiroPainel);
-        this.setVisible(true);
     }
     public void criarLoginAluno() {
+        //começa resetando tudo
+        alunoLogado = null;
+        professorSelecionado = null;
+        propostaEscolhida = null;
+        
         PainelLoginAluno loginAluno = new PainelLoginAluno();
         JButton botaoConfirmar = loginAluno.getConfirmar();
         confirmarLoginAlunos = new confirmarLoginAlunos(loginAluno);
@@ -105,6 +112,7 @@ public class frame extends JFrame{
         JButton botaoConfirmar = panelPropostasTC.getEscolherPropsota();
         botaoConfirmar.addActionListener(auxiliarGerarRelatorio);
         this.add(panelPropostasTC);
+        this.setSize(702,450);
     }
     public void criarPanelRelatorio(ArrayList<Professor> relatorio) {
         panelRelatorio = new PanelRelatorio(relatorio);
@@ -128,12 +136,62 @@ public class frame extends JFrame{
     public void criarFormularioAvaliacao(PropostaTC proposta) {
         formularioAvaliacao = new PanelFormularioAvaliacao(proposta);
         JButton botaoPrimeiro = formularioAvaliacao.getPrimeiroAvaliador();
-        botaoPrimeiro.addActionListener(criarAvaliacao);
+        botaoPrimeiro.addActionListener(new esconderFormularioAvaliacao(0));
         JButton botaoSegundo = formularioAvaliacao.getSegundoAvaliador();
-        botaoSegundo.addActionListener(criarAvaliacao);
+        botaoSegundo.addActionListener(new esconderFormularioAvaliacao(1));
         JButton botaoTerceiro = formularioAvaliacao.getTerceiroAvaliador();
-        botaoTerceiro.addActionListener(criarAvaliacao);
+        botaoTerceiro.addActionListener(new esconderFormularioAvaliacao(2));
+        if((!botaoPrimeiro.isVisible() && (!botaoSegundo.isVisible()) && (!botaoTerceiro.isVisible()))) {
+            JOptionPane.showMessageDialog(null,"...Calculando conceito final...");
+            calcularConceitoFinal();
+            formularioAvaliacao.setVisible(false);
+            criarMenu();
+        }
+        else 
         this.add(formularioAvaliacao);
+    }
+    public void calcularConceitoFinal() {
+        double n1,n2,n3;
+        n1 = converteConceitoEmNota(0);
+        n2 = converteConceitoEmNota(1);
+        n3 = converteConceitoEmNota(2);
+        String conceitoFinal;
+        double notaFinal = (n1 + n2 + n3) / 3;
+        if(notaFinal < 7) {
+            conceitoFinal = "D - Reprovado";
+        }
+        else if(notaFinal < 8.5) {
+            conceitoFinal = "C - Aprovado";
+        }
+        else if(notaFinal < 10) {
+            conceitoFinal = "B - Aprovado";
+        }
+        else {
+            conceitoFinal = "A - Aprovado";
+        }
+        JOptionPane.showMessageDialog(null, "O conceito final é: " + conceitoFinal);
+    }
+    public double converteConceitoEmNota(int i) {
+         ArrayList<Avaliacao> avaliacoes = propostaEscolhida.getBancaAvaliadora().getAvaliacoes();
+        if(avaliacoes.get(0).isAvaliacao()) {
+            switch(avaliacoes.get(0).getConceito()) {
+                case "A":
+                    return 10;
+                case "B":
+                    return 8.5;
+                case "C":
+                    return 7;
+            }
+        }
+        else return 5;
+        return 0;
+    }
+    
+    public void criarAvaliacao() {
+        panelAvaliacao = new PanelAvaliacao(propostaEscolhida, formularioAvaliacao.getAvaliadorEscolhido());
+        panelAvaliacao.getConfirmar().addActionListener(new salvarAvaliacao());
+        this.add(panelAvaliacao);
+        this.setSize(870,350);
     }
     
     /*Gerar o relatório dos professores indicados para a proposta*/
@@ -172,7 +230,7 @@ public class frame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             primeiroPainel.setVisible(false);
-            criarPanelLoginProfessor();
+            criarPanelListaPropostas();
         }
     
     }
@@ -189,19 +247,19 @@ public class frame extends JFrame{
         public void actionPerformed(ActionEvent ae) {
             String nome = loginAluno.getCampoNome().getText();
             //tem um bug aqui... se digitar uma string dá pau
-            int matricula = Integer.parseInt(loginAluno.getCampoMatricula().getText());
+            String matricula = loginAluno.getCampoMatricula().getText();
             
             if(listaAlunos.search(nome) != null){
-                if (listaAlunos.search(matricula) != null) {
+                if (listaAlunos.searchByMatricula(matricula) != null) {
                     loginAluno.setVisible(false);
                     criarPainelSugestoes(nome);
                 }
                 else {
-                    //matricula errada...
+                    JOptionPane.showMessageDialog(null, "Matricula Incorreta");
                 }
             }
             else {
-                //login errado...
+                   JOptionPane.showMessageDialog(null, "Nome Incorreto");
             }
         }
     }
@@ -230,10 +288,8 @@ public class frame extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            alunoLogado = null;
-            professorSelecionado = null;
             panelProposta.setVisible(false);
-            primeiroPainel.setVisible(true);
+            criarMenu();
         }
     }
     
@@ -241,12 +297,8 @@ public class frame extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            String nome = PanelLoginProfessor.getCampoNome().getText();
-            String email = PanelLoginProfessor.getCampoEmail().getText();
-            if(listaProfessores.search(nome) != null) {
                     criarPanelListaPropostas();
                     PanelLoginProfessor.setVisible(false);
-            }
         }
     }
     
@@ -255,9 +307,13 @@ public class frame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent ae) {
                 propostaEscolhida = panelPropostasTC.getPropostaSelecionada();
-                ArrayList<Professor> relatorioProfessores = gerarRelatorio(propostaEscolhida);
-                panelPropostasTC.setVisible(false);
-                criarPanelRelatorio(relatorioProfessores);
+                if(propostaEscolhida != null) {
+                    ArrayList<Professor> relatorioProfessores = gerarRelatorio(propostaEscolhida);
+                    panelPropostasTC.setVisible(false);
+                    criarPanelRelatorio(relatorioProfessores);
+                }
+                else 
+                    JOptionPane.showMessageDialog(null,"Escolha Alguma Proposta");
             }
         }
     private class adicionarProfessor implements ActionListener {
@@ -268,24 +324,51 @@ public class frame extends JFrame{
         public void actionPerformed(ActionEvent ae) {
                
                Professor i = panelRelatorio.getProfessorSelecionado();
-               
-               if(!professoresDaBanca.contains(i)) {
-                professoresDaBanca.add(i);
-                JOptionPane.showMessageDialog(null, "Professor " + i.getNome() + " Adicionado a Banca");
-                if(professoresDaBanca.size() == 3) {
-                    criarBancaAvaliadora(professoresDaBanca);
-                    panelRelatorio.setVisible(false);
+               if(i != null) {
+                if(!professoresDaBanca.contains(i)) {
+                 professoresDaBanca.add(i);
+                 JOptionPane.showMessageDialog(null, "Professor " + i.getNome() + " Adicionado a Banca");
+                 if(professoresDaBanca.size() == 3) {
+                     criarBancaAvaliadora(professoresDaBanca);
+                     panelRelatorio.setVisible(false);
+                 }
                 }
-               }
-               else {
-                   JOptionPane.showMessageDialog(null, "Professor " + i.getNome() + " Já faz parte da Banca");
-               }
+                else {
+                    JOptionPane.showMessageDialog(null, "Professor " + i.getNome() + " Já faz parte da Banca");
+                }
+                }
+               else JOptionPane.showMessageDialog(null, "Escolha um professor");
             }
     }
-    private class criarAvaliacao implements ActionListener {
+    private class esconderFormularioAvaliacao implements ActionListener {
+        
+        int escolha;
+        
+        esconderFormularioAvaliacao(int escolhaRecebida) {
+            this.escolha = escolhaRecebida;
+        }
+        
         @Override
         public void actionPerformed(ActionEvent ae) {
-            System.out.println("ok...");
+           formularioAvaliacao.setVisible(false);
+           formularioAvaliacao.setAvaliadorEscolhido(escolha);
+           criarAvaliacao();
+        }
+    
+    }
+    
+    private class salvarAvaliacao implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            Avaliacao avaliacao = panelAvaliacao.criarAvaliacao();
+            if(listaAvaliacoes.add(avaliacao))
+                //adiciona a avaliacao no objeto Banca Avaliadora 
+                // da proposta que estamos avaliando 
+                propostaEscolhida.getBancaAvaliadora().setAvaliacoes(avaliacao);
+                JOptionPane.showMessageDialog(null, "Avaliação submetida ao sistema");
+                panelAvaliacao.setVisible(false);
+                criarFormularioAvaliacao(propostaEscolhida);
         }
     
     }

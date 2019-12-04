@@ -1,12 +1,9 @@
 package models;
-
 import java.io.Serializable;
-
 public class Aluno implements Serializable {
-    private String nome, email, telefone;
-    private int matricula;
+    private String nome, email, telefone,matricula;
     
-    public Aluno (String nome, int matricula, String email, String telefone) {
+    public Aluno (String nome, String matricula, String email, String telefone) {
         this.nome = nome;
         this.matricula = matricula;
         this.email = email;
@@ -25,7 +22,7 @@ public class Aluno implements Serializable {
         return telefone;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
     
@@ -37,7 +34,7 @@ public class Aluno implements Serializable {
         this.telefone = telefone;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 

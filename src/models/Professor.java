@@ -8,7 +8,7 @@ public class Professor implements Comparable, Serializable {
     private ArrayList<String> areaDeInteresse;
     private boolean orientador;
     private int cargaTrabalho;
-
+    
     public Professor(String nome, String email, boolean orientador) {
         this.nome = nome;
         this.email = email;
