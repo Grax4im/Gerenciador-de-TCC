@@ -15,6 +15,7 @@ public class frame extends JFrame{
     e do professor que vai orienta-lo*/
     private Aluno alunoLogado;
     private Professor professorSelecionado;
+    private PropostaTC propostaEscolhida;
     
     /*Classes DAO*/
     private DAOaluno listaAlunos;
@@ -119,11 +120,18 @@ public class frame extends JFrame{
         if(listaBancas.add(bancaAvaliadora)) {
             JOptionPane.showMessageDialog(null,"Banca Avaliadora Criada com Sucesso!");
             JOptionPane.showMessageDialog(null,"E-mail enviado para todos os avaliadores");            
-            criarFormularioAvaliacao(bancaAvaliadora);
+            propostaEscolhida.setBancaAvaliadora(bancaAvaliadora);
+            criarFormularioAvaliacao(propostaEscolhida);
         }
     }
-    public void criarFormularioAvaliacao(BancaAvaliadora banca) {
-        formularioAvaliacao = new PanelFormularioAvaliacao(banca);
+    public void criarFormularioAvaliacao(PropostaTC proposta) {
+        formularioAvaliacao = new PanelFormularioAvaliacao(proposta);
+        JButton botaoPrimeiro = formularioAvaliacao.getPrimeiroAvaliador();
+        botaoPrimeiro.addActionListener(criarAvaliacao(0));
+        JButton botaoSegundo = formularioAvaliacao.getSegundoAvaliador();
+        botaoSegundo.addActionListener(criarAvaliacao(1));
+        JButton botaoTerceiro = formularioAvaliacao.getTerceiroAvaliador();
+        botaoTerceiro.addActionListener(criarAvaliacao(3));
         this.add(formularioAvaliacao);
     }
     
@@ -245,8 +253,8 @@ public class frame extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-                PropostaTC proposta = panelPropostasTC.getPropostaSelecionada();
-                ArrayList<Professor> relatorioProfessores = gerarRelatorio(proposta);
+                propostaEscolhida = panelPropostasTC.getPropostaSelecionada();
+                ArrayList<Professor> relatorioProfessores = gerarRelatorio(propostaEscolhida);
                 panelPropostasTC.setVisible(false);
                 criarPanelRelatorio(relatorioProfessores);
             }
@@ -272,6 +280,17 @@ public class frame extends JFrame{
                    JOptionPane.showMessageDialog(null, "Professor " + i.getNome() + " Já faz parte da Banca");
                }
             }
+    }
+    private class criarAvaliacao implements ActionListener {
+
+        criarAvaliacao(int i) {
+            
+        }
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+                System.out.println("blablabla");
+        }
+    
     }
     
 }

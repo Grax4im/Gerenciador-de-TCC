@@ -1,18 +1,18 @@
 package sistematcc;
 
 import javax.swing.JButton;
-import models.BancaAvaliadora;
+import models.PropostaTC;
 
 public class PanelFormularioAvaliacao extends javax.swing.JPanel {
 
-    BancaAvaliadora banca; 
+    PropostaTC banca; 
     
-    public PanelFormularioAvaliacao(BancaAvaliadora banca) {
+    public PanelFormularioAvaliacao(PropostaTC banca) {
         initComponents();
         this.banca = banca;
-        primeiroAvaliador.setText("Adicionar Avaliação Prof. "+banca.getAvaliadores().get(0).getNome());
-        segundoAvaliador.setText("Adicionar Avaliação Prof. " + banca.getAvaliadores().get(1).getNome());
-        terceiroAvaliador.setText("Adicionar Avaliação Prof. " + banca.getAvaliadores().get(2).getNome());
+        primeiroAvaliador.setText("Adicionar Avaliação Prof. "+banca.getBancaAvaliadora().getAvaliadores().get(0).getNome());
+        segundoAvaliador.setText("Adicionar Avaliação Prof. " + banca.getBancaAvaliadora().getAvaliadores().get(1).getNome());
+        terceiroAvaliador.setText("Adicionar Avaliação Prof. " + banca.getBancaAvaliadora().getAvaliadores().get(2).getNome());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

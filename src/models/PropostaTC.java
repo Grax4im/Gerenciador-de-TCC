@@ -4,6 +4,7 @@ public class PropostaTC {
     private Aluno autor;
     private Professor orientador;
     private String areaDoProjeto;
+    private BancaAvaliadora bancaAvaliadora;
 
     public PropostaTC(String titulo, Aluno autor, Professor orientador, String area) {
         this.titulo = titulo;
@@ -38,6 +39,12 @@ public class PropostaTC {
 
     public void setOrientador(Professor orientador) {
         this.orientador = orientador;
+    }
+    public BancaAvaliadora getBancaAvaliadora() {
+        return bancaAvaliadora;
+    }
+    public void setBancaAvaliadora(BancaAvaliadora banca) {
+        this.bancaAvaliadora = banca;
     }
 
     @Override
