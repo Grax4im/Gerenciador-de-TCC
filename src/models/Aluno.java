@@ -1,5 +1,8 @@
 package models;
-public class Aluno {
+
+import java.io.Serializable;
+
+public class Aluno implements Serializable {
     private String nome, email, telefone;
     private int matricula;
     

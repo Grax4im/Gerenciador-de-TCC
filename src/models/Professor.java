@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Professor implements Comparable{
+public class Professor implements Comparable, Serializable {
     private String nome, email, sugestao;
     private ArrayList<String> areaDeInteresse;
     private boolean orientador;

@@ -1,6 +1,7 @@
 package models;
+import java.io.Serializable;
 import java.util.ArrayList;
-public class BancaAvaliadora {
+public class BancaAvaliadora implements Serializable {
     //array com 3 professores
     private ArrayList<Professor> avaliador = new ArrayList();
 

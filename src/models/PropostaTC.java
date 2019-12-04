@@ -1,5 +1,8 @@
 package models;
-public class PropostaTC {
+
+import java.io.Serializable;
+
+public class PropostaTC implements Serializable {
     private String titulo;
     private Aluno autor;
     private Professor orientador;

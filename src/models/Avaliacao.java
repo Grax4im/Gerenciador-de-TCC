@@ -1,6 +1,7 @@
 package models;
+import java.io.Serializable;
 import java.util.Objects;
-public class Avaliacao {
+public class Avaliacao implements Serializable{
     private Aluno aluno;
     private Professor avaliador;
     private String titulo;
