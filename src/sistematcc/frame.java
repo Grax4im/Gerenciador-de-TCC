@@ -33,6 +33,7 @@ public class frame extends JFrame{
     private final propostaEnviada propostaEnviada = new propostaEnviada();
     private final confirmarLoginProfessor confirmarLoginProfessor = new confirmarLoginProfessor();
     private final auxiliarGerarRelatorio auxiliarGerarRelatorio = new auxiliarGerarRelatorio();
+    private criarAvaliacao criarAvaliacao = new criarAvaliacao();
     
     private PanelDefinicaoOrientadorTema panelProposta;
     private PanelWhoAmI primeiroPainel;
@@ -127,11 +128,11 @@ public class frame extends JFrame{
     public void criarFormularioAvaliacao(PropostaTC proposta) {
         formularioAvaliacao = new PanelFormularioAvaliacao(proposta);
         JButton botaoPrimeiro = formularioAvaliacao.getPrimeiroAvaliador();
-        botaoPrimeiro.addActionListener(criarAvaliacao(0));
+        botaoPrimeiro.addActionListener(criarAvaliacao);
         JButton botaoSegundo = formularioAvaliacao.getSegundoAvaliador();
-        botaoSegundo.addActionListener(criarAvaliacao(1));
+        botaoSegundo.addActionListener(criarAvaliacao);
         JButton botaoTerceiro = formularioAvaliacao.getTerceiroAvaliador();
-        botaoTerceiro.addActionListener(criarAvaliacao(3));
+        botaoTerceiro.addActionListener(criarAvaliacao);
         this.add(formularioAvaliacao);
     }
     
@@ -282,13 +283,9 @@ public class frame extends JFrame{
             }
     }
     private class criarAvaliacao implements ActionListener {
-
-        criarAvaliacao(int i) {
-            
-        }
         @Override
         public void actionPerformed(ActionEvent ae) {
-                System.out.println("blablabla");
+            System.out.println("ok...");
         }
     
     }
