@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import models.Aluno;
+import models.Serializar;
 import models.tableModelCrudAluno;
 
 /**
@@ -25,7 +26,7 @@ public class CrudAluno extends javax.swing.JPanel {
     }
     
     public void popularTabela() {
-        ArrayList<Aluno> lista = Aluno.listaAlunos;
+        ArrayList<Aluno> lista = Serializar.load("alunos.ser");
         for(Aluno i : lista){
             modelo.addRow(i);
         }

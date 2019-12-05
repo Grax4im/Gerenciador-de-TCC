@@ -10,7 +10,6 @@ public class Avaliacao implements Serializable{
     private String parecer;
     private boolean avaliacao;
     private String conceito;
-    public static ArrayList<Avaliacao> listaAvaliacoes = new ArrayList();
 
     public Avaliacao(PropostaTC proposta,Professor avaliador, boolean avaliacao) {
         this.aluno = proposta.getAutor();

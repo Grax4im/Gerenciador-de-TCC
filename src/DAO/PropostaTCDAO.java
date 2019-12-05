@@ -1,13 +1,18 @@
 package DAO;
 import java.util.ArrayList;
 import models.PropostaTC;
+import models.Serializar;
 public class PropostaTCDAO implements DAO<PropostaTC>{
     
-    ArrayList<PropostaTC> lista = PropostaTC.listaPropostas;
+    ArrayList<PropostaTC> lista = Serializar.load("listaPropostas.ser");
     
 
     public boolean update(PropostaTC object, PropostaTC newObject) {
-        return object.copy(newObject);
+         if(object.copy(newObject)){
+            Serializar.serializar("listaPropostas.ser", lista);
+            return true;
+        }
+        return false;
     }
 
     //search PropostaTC by title
@@ -26,11 +31,19 @@ public class PropostaTCDAO implements DAO<PropostaTC>{
 
     @Override
     public boolean add(PropostaTC object) {
-        return lista.add(object);
+         if(lista.add(object)){
+            Serializar.serializar("listaPropostas.ser", lista);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean remove(PropostaTC object) {
-        return lista.remove(object);
+        if(lista.remove(object)){
+            Serializar.serializar("listaPropostas.ser", lista);
+            return true;
+        }
+        return false;
     }
 }

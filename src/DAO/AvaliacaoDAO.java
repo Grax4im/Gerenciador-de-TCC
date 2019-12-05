@@ -1,11 +1,15 @@
 package DAO;
+import java.util.ArrayList;
 import models.Avaliacao;
+import models.Serializar;
 public class AvaliacaoDAO implements DAO<Avaliacao>{
+    
+    private ArrayList<Avaliacao> lista = new ArrayList();
     
     @Override
     //busca avaliação por nome do Avaliador
     public Avaliacao search(String nomeAvaliador) {
-        for(Avaliacao i : Avaliacao.listaAvaliacoes) {
+        for(Avaliacao i : lista) {
             if(i.getAvaliador().getNome().equals(nomeAvaliador)) return i;
         }
         //se não encontrar
@@ -14,11 +18,20 @@ public class AvaliacaoDAO implements DAO<Avaliacao>{
 
     @Override
     public boolean add(Avaliacao object) {
-        return Avaliacao.listaAvaliacoes.add(object);
+    
+    if(lista.add(object)){
+            Serializar.serializar("listaAvaliacoes.ser", lista);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean remove(Avaliacao object) {
-        return Avaliacao.listaAvaliacoes.remove(object);
+        if(lista.remove(object)){
+            Serializar.serializar("listaAvaliacoes.ser", lista);
+            return true;
+        }
+        return false;
     }
 }

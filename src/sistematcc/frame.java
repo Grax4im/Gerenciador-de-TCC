@@ -25,15 +25,15 @@ public class frame extends JFrame{
     private AvaliacaoDAO listaAvaliacoes;
     
     /*instancia das classes auxiliares*/
-    private final adicionarProfessor adicionarProfessor = new adicionarProfessor();
-    private final escolherProfessor escolherProfessor = new escolherProfessor();
+    private adicionarProfessor adicionarProfessor;
+    private escolherProfessor escolherProfessor;
     private confirmarLoginAlunos confirmarLoginAlunos;
-    private final loginAlunos loginAlunos = new loginAlunos();
-    private final loginProfessores loginProfessores = new loginProfessores();
+    private loginAlunos loginAlunos;
+    private loginProfessores loginProfessores;
     private PanelProfessores painelSugestoes;
-    private final propostaEnviada propostaEnviada = new propostaEnviada();
-    private final confirmarLoginProfessor confirmarLoginProfessor = new confirmarLoginProfessor();
-    private final auxiliarGerarRelatorio auxiliarGerarRelatorio = new auxiliarGerarRelatorio();
+    private propostaEnviada propostaEnviada;
+    private confirmarLoginProfessor confirmarLoginProfessor;
+    private auxiliarGerarRelatorio auxiliarGerarRelatorio;
     
     private PanelDefinicaoOrientadorTema panelProposta;
     private PanelWhoAmI primeiroPainel;
@@ -70,11 +70,12 @@ public class frame extends JFrame{
         primeiroPainel = new PanelWhoAmI();
         JButton souAluno = primeiroPainel.getSouAluno();
         JButton souProfessor = primeiroPainel.getSouProfessor();
-        souAluno.addActionListener(loginAlunos);
-        souProfessor.addActionListener(loginProfessores);
+        souAluno.addActionListener(new loginAlunos());
+        souProfessor.addActionListener(new loginProfessores());
         primeiroPainel.getCrudAlunos().addActionListener(new abrirCRUDAluno());
         primeiroPainel.getCrudProfessores().addActionListener(new abrirCRUDProfessor());
         this.add(primeiroPainel);
+        this.setSize(600,500);
     }
     public void criarLoginAluno() {
         //começa resetando tudo
@@ -92,6 +93,7 @@ public class frame extends JFrame{
         alunoLogado = listaAlunos.search(nome);
         painelSugestoes = new PanelProfessores(listaProfessores);
         JButton botaoEscolherProfessor = painelSugestoes.getEscolherProfessor();
+        escolherProfessor = new escolherProfessor();
         botaoEscolherProfessor.addActionListener(escolherProfessor);
         this.add(painelSugestoes);
     }
@@ -101,28 +103,29 @@ public class frame extends JFrame{
             new PanelDefinicaoOrientadorTema(alunoLogado, professorSelecionado, listaPropostas);
         this.add(panelProposta);
             JButton botaoConfirmar = panelProposta.getConfirmar();
-            botaoConfirmar.addActionListener(propostaEnviada);
+            botaoConfirmar.addActionListener(new propostaEnviada());
             
     }
     public void criarPanelLoginProfessor() {
         PanelLoginProfessor = new PanelLoginProfessor();
         JButton botaoConfirmar = PanelLoginProfessor.getConfirmar();
-        botaoConfirmar.addActionListener(confirmarLoginProfessor);
+        botaoConfirmar.addActionListener(new confirmarLoginProfessor());
         this.add(PanelLoginProfessor);
     }
     
     public void criarPanelListaPropostas() {
         panelPropostasTC = new PanelPropostasTC(listaPropostas);
         JButton botaoConfirmar = panelPropostasTC.getEscolherPropsota();
-        botaoConfirmar.addActionListener(auxiliarGerarRelatorio);
+        botaoConfirmar.addActionListener(new auxiliarGerarRelatorio());
         this.add(panelPropostasTC);
         this.setSize(702,450);
     }
     public void criarPanelRelatorio(ArrayList<Professor> relatorio) {
         panelRelatorio = new PanelRelatorio(relatorio);
         JButton confirmar = panelRelatorio.getEscolherProfessor();
-        confirmar.addActionListener(adicionarProfessor);
+        confirmar.addActionListener(new adicionarProfessor());
         this.add(panelRelatorio);
+        this.setSize(1000,500);
     }
     public void criarBancaAvaliadora(ArrayList<Professor> banca) {
         Professor primeiro = banca.get(0);
@@ -174,6 +177,7 @@ public class frame extends JFrame{
             conceitoFinal = "A - Aprovado";
         }
         JOptionPane.showMessageDialog(null, "O conceito final é: " + conceitoFinal);
+        criarMenu();
     }
     public void criarPanelCRUDAluno() {
         primeiroPainel.setVisible(false);
@@ -343,6 +347,7 @@ public class frame extends JFrame{
                if(i != null) {
                 if(!professoresDaBanca.contains(i)) {
                  professoresDaBanca.add(i);
+                 i.setCargaTrabalho();
                  JOptionPane.showMessageDialog(null, "Professor " + i.getNome() + " Adicionado a Banca");
                  if(professoresDaBanca.size() == 3) {
                      criarBancaAvaliadora(professoresDaBanca);

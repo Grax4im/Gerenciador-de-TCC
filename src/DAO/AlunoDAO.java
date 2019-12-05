@@ -1,20 +1,32 @@
 package DAO;
+import java.util.ArrayList;
 import models.Aluno;
+import models.Serializar;
 public class AlunoDAO implements DAO<Aluno>{
 
+    private ArrayList<Aluno> lista = Serializar.load("alunos.ser");
+    
     @Override
     public boolean add(Aluno object) {
-        return Aluno.listaAlunos.add(object);
+        if(lista.add(object)){
+            Serializar.serializar("alunos.ser", lista);
+            return true;
+        }
+        return false;
     }
     
     public boolean update(Aluno object, Aluno newObject) {
-        return object.copy(newObject);
+        if (object.copy(newObject)) {
+            Serializar.serializar("alunos.ser", lista);
+            return true;
+        }
+        return false;
     }
     
     //search student by Name
     @Override
     public Aluno search(String name) {
-        for(Aluno i : Aluno.listaAlunos) {
+        for(Aluno i : lista) {
             if (i.getNome().equals(name)) {
                 return i;
             }
@@ -24,7 +36,7 @@ public class AlunoDAO implements DAO<Aluno>{
     }
     //search student by Matricula
     public Aluno searchByMatricula(String matricula) {
-        for(Aluno i : Aluno.listaAlunos) {
+        for(Aluno i : lista) {
             if (i.getMatricula().equals(matricula)) {
                 return i;
             }
@@ -35,6 +47,10 @@ public class AlunoDAO implements DAO<Aluno>{
 
     @Override
     public boolean remove(Aluno object) {
-        return Aluno.listaAlunos.remove(object);
+        if(lista.remove(object)) {
+            Serializar.serializar("alunos.ser", lista);
+            return true;
+        }
+        return false;
     }
 }

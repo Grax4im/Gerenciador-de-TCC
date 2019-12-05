@@ -1,0 +1,18 @@
+-------------> GERENCIADOR TCC <-----------------------------
+
+1. Entre no CRUD Professores
+	1.1 Crie alguns professores (sugestão: 5)
+	1.2 Volte para a Tela Inicial (botão inferior)
+2. Entre no CRUD Alunos
+	2.1 Crie alguns alunos (pode ser um só)
+	2.2 Volte para a Tela Inicial
+3. Entre no "Sou Aluno"
+	3.1 - Insira as Informações do Aluno
+	3.2 - Escolha Alguma Sugestão na Lista dos Professores
+	3.3 - Adicione Titulo do Trabalho e Area do Trabalho
+	
+4. Entre no "Sou Professor"
+	4.1 - Selecione a Proposta de TC recem criada
+	4.2 - Escolha 3 professores para compor a banca Avaliadora
+	4.3 - Insira as notas de cada Professor Avaliador
+	4.4 - Veja a nota Final

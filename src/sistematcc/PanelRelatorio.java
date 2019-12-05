@@ -57,6 +57,11 @@ public class PanelRelatorio extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         escolherProfessor.setText("Escolher Professor");
+        escolherProfessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escolherProfessorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,6 +91,10 @@ public class PanelRelatorio extends javax.swing.JPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void escolherProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escolherProfessorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_escolherProfessorActionPerformed
 
     public JButton getEscolherProfessor() {
         return escolherProfessor;

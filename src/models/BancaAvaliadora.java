@@ -5,7 +5,6 @@ public class BancaAvaliadora implements Serializable {
     //array com 3 professores
     private ArrayList<Professor> avaliador = new ArrayList();
     private ArrayList<Avaliacao> avaliacoes = new ArrayList();
-    public static ArrayList<BancaAvaliadora> listaBancas = new ArrayList();
 
     public BancaAvaliadora() {}
     public BancaAvaliadora(Professor a) {

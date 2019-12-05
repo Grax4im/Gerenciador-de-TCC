@@ -19,7 +19,9 @@ public class PanelPropostasTC extends javax.swing.JPanel {
     /*Este método percorre toda a lista de professores e coloca seus dados na tabela*/
     public void popularTabela() {
         for(PropostaTC i : listaPropostas.getLista()) {
-                tableModelPropostas.addRow(i);
+                if(i.getBancaAvaliadora() == null) {
+                    tableModelPropostas.addRow(i);
+                }
         }
     }
     @SuppressWarnings("unchecked")

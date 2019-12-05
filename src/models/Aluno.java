@@ -52,7 +52,7 @@ public class Aluno implements Serializable {
         this.nome= novoAluno.nome;
         this.matricula = novoAluno.matricula;
         this.email = novoAluno.email;
-        this.telefone = novoAluno.email;
+        this.telefone = novoAluno.telefone;
         return true;
     }
     

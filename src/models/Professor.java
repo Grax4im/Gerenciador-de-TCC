@@ -8,7 +8,6 @@ public class Professor implements Serializable {
     private ArrayList<String> areaDeInteresse = new ArrayList();
     private boolean orientador;
     private int cargaTrabalho;
-    public static ArrayList<Professor> listaProfessores = new ArrayList();
     
     public Professor(String nome, String email, boolean orientador) {
         this.nome = nome;

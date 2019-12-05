@@ -2,16 +2,23 @@ package DAO;
 import java.util.ArrayList;
 import models.BancaAvaliadora;
 import models.Professor;
+import models.Serializar;
 public class BancaAvaliadoraDAO implements DAO<BancaAvaliadora>{
     
+    private ArrayList<BancaAvaliadora> lista = Serializar.load("listaBancas.ser");
+    
     public boolean update(BancaAvaliadora object, BancaAvaliadora newObject) {
-        return object.copy(newObject);
+        if(object.copy(newObject)){
+            Serializar.serializar("listaBancas.ser", lista);
+            return true;
+        }
+        return false;
     }
 
     //search by professor name
     @Override
     public BancaAvaliadora search(String nameProfessor) {
-        for(BancaAvaliadora i : BancaAvaliadora.listaBancas) {
+        for(BancaAvaliadora i : lista) {
             for(Professor j: i.getAvaliadores()) {
                 if(j.getNome().equals(nameProfessor)) 
                 return i;
@@ -21,16 +28,24 @@ public class BancaAvaliadoraDAO implements DAO<BancaAvaliadora>{
     }
     
     public ArrayList<BancaAvaliadora> getLista() {
-        return BancaAvaliadora.listaBancas;
+        return lista;
     }
 
     @Override
     public boolean add(BancaAvaliadora object) {
-        return BancaAvaliadora.listaBancas.add(object);
+        if(lista.add(object)){
+            Serializar.serializar("listaBancas.ser", lista);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean remove(BancaAvaliadora object) {
-        return BancaAvaliadora.listaBancas.remove(object);
+        if(lista.remove(object)){
+            Serializar.serializar("listaBancas.ser", lista);
+            return true;
+        }
+        return false;
     }
 }
