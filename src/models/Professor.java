@@ -3,9 +3,9 @@ package models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Professor implements Comparable, Serializable {
+public class Professor implements Serializable {
     private String nome, email, sugestao;
-    private ArrayList<String> areaDeInteresse;
+    private ArrayList<String> areaDeInteresse = new ArrayList();
     private boolean orientador;
     private int cargaTrabalho;
     public static ArrayList<Professor> listaProfessores = new ArrayList();
@@ -14,6 +14,10 @@ public class Professor implements Comparable, Serializable {
         this.nome = nome;
         this.email = email;
         this.orientador = orientador;
+    }
+    
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -41,6 +45,9 @@ public class Professor implements Comparable, Serializable {
 
     public void setAreaDeInteresse(ArrayList areaDeInteresse) {
         this.areaDeInteresse = areaDeInteresse;
+    }
+    public void addAreaDeInteresse(String areaDeInteresse) {
+        this.areaDeInteresse.add(areaDeInteresse);
     }
 
     public String getSugestao() {
@@ -87,18 +94,5 @@ public class Professor implements Comparable, Serializable {
         this.sugestao = newProfessor.getSugestao();
         this.orientador = newProfessor.isOrientador();
         return true;
-    }
-
-    @Override
-    public int compareTo(Object outroProfessor) {
-        Professor outroProf = (Professor)outroProfessor; 
-        if(this.cargaTrabalho < outroProf.getCargaTrabalho()) {
-            return -1;
-        }
-        if(this.cargaTrabalho > outroProf.getCargaTrabalho()) {
-            return 1;
-        }
-        
-        return 0;
     }
 }

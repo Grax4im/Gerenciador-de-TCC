@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistematcc;
 
 import javax.swing.JButton;
 
-/**
- *
- * @author rob
- */
 public class PanelWhoAmI extends javax.swing.JPanel {
 
     /**
@@ -31,7 +22,7 @@ public class PanelWhoAmI extends javax.swing.JPanel {
 
         crudProfessores = new javax.swing.JButton();
         souProfessor = new javax.swing.JButton();
-        souAluno1 = new javax.swing.JButton();
+        souAluno = new javax.swing.JButton();
         crudAlunos = new javax.swing.JButton();
 
         crudProfessores.setText("CRUD Professores");
@@ -48,10 +39,10 @@ public class PanelWhoAmI extends javax.swing.JPanel {
             }
         });
 
-        souAluno1.setText("Sou Aluno");
-        souAluno1.addActionListener(new java.awt.event.ActionListener() {
+        souAluno.setText("Sou Aluno");
+        souAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                souAluno1ActionPerformed(evt);
+                souAlunoActionPerformed(evt);
             }
         });
 
@@ -71,7 +62,7 @@ public class PanelWhoAmI extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(souAluno1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(souAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(souProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(82, 82, 82))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -87,7 +78,7 @@ public class PanelWhoAmI extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(souAluno1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(souAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(souProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
@@ -109,16 +100,16 @@ public class PanelWhoAmI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_souProfessorActionPerformed
 
-    private void souAluno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_souAluno1ActionPerformed
+    private void souAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_souAlunoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_souAluno1ActionPerformed
+    }//GEN-LAST:event_souAlunoActionPerformed
 
     private void crudAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudAlunosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_crudAlunosActionPerformed
 
     public JButton getSouAluno() {
-        return souProfessor;
+        return souAluno;
     }
 
     public JButton getSouProfessor() {
@@ -136,7 +127,7 @@ public class PanelWhoAmI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton crudAlunos;
     private javax.swing.JButton crudProfessores;
-    private javax.swing.JButton souAluno1;
+    private javax.swing.JButton souAluno;
     private javax.swing.JButton souProfessor;
     // End of variables declaration//GEN-END:variables
 }

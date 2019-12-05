@@ -45,4 +45,11 @@ public class tableModelCrudProfessor extends AbstractTableModel{
         this.fireTableDataChanged();
     }
     
+    public void removeRow(int i) {
+        this.dados.remove(i);
+        this.fireTableRowsDeleted(i, i);
+    }
+
+    
+    
 }
