@@ -1,7 +1,9 @@
 package models;
 import java.io.Serializable;
+import java.util.ArrayList;
 public class Aluno implements Serializable {
     private String nome, email, telefone,matricula;
+    public static ArrayList<Aluno> listaAlunos = new ArrayList();
     
     public Aluno (String nome, String matricula, String email, String telefone) {
         this.nome = nome;
@@ -24,6 +26,9 @@ public class Aluno implements Serializable {
 
     public String getMatricula() {
         return matricula;
+    }
+    public void setNome(String nome){
+        this.nome = nome;
     }
     
     public void setEmail(String email) {

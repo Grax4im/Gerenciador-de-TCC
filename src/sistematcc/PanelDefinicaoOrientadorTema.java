@@ -1,6 +1,6 @@
 package sistematcc;
 
-import DAO.DAOpropostaTC;
+import DAO.PropostaTCDAO;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import models.Aluno;
@@ -11,9 +11,9 @@ public class PanelDefinicaoOrientadorTema extends javax.swing.JPanel {
 
     private Aluno aluno;
     private Professor professor;
-    private DAOpropostaTC listaPropostas;
+    private PropostaTCDAO listaPropostas;
     
-    public PanelDefinicaoOrientadorTema(Aluno alunoLogado, Professor professorSelecionado, DAOpropostaTC proposta) {
+    public PanelDefinicaoOrientadorTema(Aluno alunoLogado, Professor professorSelecionado, PropostaTCDAO proposta) {
         this.aluno = alunoLogado;
         this.professor = professorSelecionado;
         this.listaPropostas = proposta;

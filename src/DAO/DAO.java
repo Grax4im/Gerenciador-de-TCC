@@ -1,25 +1,10 @@
 package DAO;
 import java.util.ArrayList;
 
-public abstract class DAO<Object> {
-    protected ArrayList<Object> lista = new ArrayList();
+public interface DAO<Object> {    
+    public boolean add(Object object);
     
-    public boolean add(Object object) {
-        return lista.add(object);
-    }
-    
-    public boolean remove(Object object) {
-        return lista.remove(object);
-    }
+    public boolean remove(Object object);
     //Como implementar a busca?
-    public Object search(String pesquisa) {
-        Object resultado = null;
-        //implementar a pesquisa aqui
-        return resultado;
-    }
-    public boolean update(Object object, Object newObject) {
-       return false;
-    }
-    
-    
+    public Object search(String pesquisa);
 }

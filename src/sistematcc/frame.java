@@ -18,11 +18,11 @@ public class frame extends JFrame{
     private PropostaTC propostaEscolhida;
     
     /*Classes DAO*/
-    private DAOaluno listaAlunos;
-    private DAOprofessor listaProfessores;
-    private DAOpropostaTC listaPropostas;
-    private DAOBancaAvaliadora listaBancas;
-    private DAOavaliacao listaAvaliacoes;
+    private AlunoDAO listaAlunos;
+    private ProfessorDAO listaProfessores;
+    private PropostaTCDAO listaPropostas;
+    private BancaAvaliadoraDAO listaBancas;
+    private AvaliacaoDAO listaAvaliacoes;
     
     /*instancia das classes auxiliares*/
     private final adicionarProfessor adicionarProfessor = new adicionarProfessor();
@@ -42,11 +42,13 @@ public class frame extends JFrame{
     private PanelRelatorio panelRelatorio;
     private PanelFormularioAvaliacao formularioAvaliacao;
     private PanelAvaliacao panelAvaliacao;
+    private CrudProfessor panelCRUDProfessor;
+    private CrudAluno panelCRUDAluno;
     
 
     /*Inicializadores do frame*/
-    public frame(DAOaluno listaAlunos, DAOprofessor listaProfessores, DAOpropostaTC listaPropostas
-    , DAOBancaAvaliadora listaBancas, DAOavaliacao listaAvaliacoes) {
+    public frame(AlunoDAO listaAlunos, ProfessorDAO listaProfessores, PropostaTCDAO listaPropostas
+    , BancaAvaliadoraDAO listaBancas, AvaliacaoDAO listaAvaliacoes) {
         super("Gerenciador de TCC");
         this.listaAlunos = listaAlunos;
         this.listaProfessores = listaProfessores;
@@ -70,6 +72,8 @@ public class frame extends JFrame{
         JButton souProfessor = primeiroPainel.getSouProfessor();
         souAluno.addActionListener(loginAlunos);
         souProfessor.addActionListener(loginProfessores);
+        primeiroPainel.getCrudAlunos().addActionListener(new abrirCRUDAluno());
+        primeiroPainel.getCrudProfessores().addActionListener(new abrirCRUDProfessor());
         this.add(primeiroPainel);
     }
     public void criarLoginAluno() {
@@ -171,6 +175,18 @@ public class frame extends JFrame{
         }
         JOptionPane.showMessageDialog(null, "O conceito final é: " + conceitoFinal);
     }
+    public void criarPanelCRUDAluno() {
+        primeiroPainel.setVisible(false);
+        panelCRUDAluno = new CrudAluno(listaAlunos);
+        panelCRUDAluno.getConfirmar().addActionListener(new voltarMenu(1));
+        this.add(panelCRUDAluno);
+    }
+    public void criarPanelCRUDProfessor() {
+        primeiroPainel.setVisible(false);
+        panelCRUDProfessor = new CrudProfessor(listaProfessores);
+        panelCRUDProfessor.getConfirmar().addActionListener(new voltarMenu(0));
+        this.add(panelCRUDProfessor);
+    }
     public double converteConceitoEmNota(int i) {
          ArrayList<Avaliacao> avaliacoes = propostaEscolhida.getBancaAvaliadora().getAvaliacoes();
         if(avaliacoes.get(0).isAvaliacao()) {
@@ -235,7 +251,7 @@ public class frame extends JFrame{
     
     }
     /*classe responsavel por verificar se NOME E MATRICULA
-    existe no DAOaluno
+    existe no AlunoDAO
     */
     private class confirmarLoginAlunos implements ActionListener {
         PainelLoginAluno loginAluno;
@@ -373,4 +389,33 @@ public class frame extends JFrame{
     
     }
     
+    private class abrirCRUDAluno implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            criarPanelCRUDAluno();
+        }
+    }
+    private class abrirCRUDProfessor implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            criarPanelCRUDProfessor();
+        }
+    
+    }
+    private class voltarMenu implements ActionListener {
+        int i;
+        voltarMenu(int i) {
+            this.i = i;
+        }
+        public void actionPerformed(ActionEvent ae) {
+            if(i == 0) 
+            panelCRUDProfessor.setVisible(false);
+            else
+            panelCRUDAluno.setVisible(false);
+            criarMenu();
+        }
+        
+    }
 }

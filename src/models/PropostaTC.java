@@ -1,6 +1,7 @@
 package models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class PropostaTC implements Serializable {
     private String titulo;
@@ -8,6 +9,7 @@ public class PropostaTC implements Serializable {
     private Professor orientador;
     private String areaDoProjeto;
     private BancaAvaliadora bancaAvaliadora;
+    public static ArrayList<PropostaTC> listaPropostas = new ArrayList();
 
     public PropostaTC(String titulo, Aluno autor, Professor orientador, String area) {
         this.titulo = titulo;

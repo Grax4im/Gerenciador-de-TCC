@@ -7,7 +7,7 @@ import models.*;
 public class Principal{
     public static void main(String[] args) {
         /*cria uma lista de alunos e adiciona 3 alunos*/
-        DAOaluno listaAlunos = new DAOaluno();
+        AlunoDAO listaAlunos = new AlunoDAO();
         Aluno robert = new Aluno("Robert", "1234", "robertsilveiracrust@gmail.com","1234");
         listaAlunos.add(robert);
         Aluno ariane = new Aluno("Ariane", "5678", "ariane.huber@gmail.com","1234");
@@ -15,7 +15,7 @@ public class Principal{
         Aluno nicolas = new Aluno("Nicolas", "91011", "nicolas.coutinho@gmail.com","1234");
         listaAlunos.add(nicolas);  
         /*cria uma lista de professores e adiciona 3 professores*/
-        DAOprofessor listaProfessores = new DAOprofessor();
+        ProfessorDAO listaProfessores = new ProfessorDAO();
         
         Professor karen = new Professor("Karen","javakaren@gmail.com", true);
         ArrayList areaInteresse = new ArrayList();
@@ -45,13 +45,13 @@ public class Principal{
         listaProfessores.add(marcio);
         
         /*Cria a lista com todas as propostas de TC*/
-        DAOpropostaTC listaPropostas = new DAOpropostaTC();
+        PropostaTCDAO listaPropostas = new PropostaTCDAO();
         listaPropostas.add(new PropostaTC("Gamificação",robert, marcio,"Games"));
         listaPropostas.add(new PropostaTC("Machine Learning",ariane, joao,"Java"));
         listaPropostas.add(new PropostaTC("Maker", nicolas, karen,"Java"));
 
-        DAOBancaAvaliadora listaBancas = new DAOBancaAvaliadora();
-        DAOavaliacao listaAvaliacoes = new DAOavaliacao();
+        BancaAvaliadoraDAO listaBancas = new BancaAvaliadoraDAO();
+        AvaliacaoDAO listaAvaliacoes = new AvaliacaoDAO();
         /*cria o JFrame e passa a lista pra ele*/
         frame frame = new frame(listaAlunos, listaProfessores, listaPropostas, listaBancas, listaAvaliacoes);
     }

@@ -39,10 +39,30 @@ public class tableModelCrudAluno extends AbstractTableModel{
         }
         return null;
     }
+
+    @Override
+    public void setValueAt(Object o, int linha, int coluna) {
+        switch(coluna){
+                case 0:
+                    dados.get(linha).setNome((String)o);
+                case 1:
+                    dados.get(linha).setEmail((String)o);
+                case 2:
+                    dados.get(linha).setMatricula((String)o);
+                case 3:
+                    dados.get(linha).setTelefone((String)o);
+        }
+    }
+    
     
     public void addRow(Aluno i) {
         this.dados.add(i);
         this.fireTableDataChanged();
+    }
+    
+    public void removeRow(int linha) {
+        this.dados.remove(linha);
+        this.fireTableRowsDeleted(linha, linha);
     }
     
 }

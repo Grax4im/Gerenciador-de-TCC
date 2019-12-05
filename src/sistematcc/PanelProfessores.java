@@ -1,5 +1,5 @@
 package sistematcc;
-import DAO.DAOprofessor;
+import DAO.ProfessorDAO;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import models.Professor;
@@ -7,10 +7,10 @@ import models.tableModel;
 
 public class PanelProfessores extends javax.swing.JPanel {
     private Professor professorSelecionado;
-    private DAOprofessor listaProfessores;
+    private ProfessorDAO listaProfessores;
     private tableModel tableModel;
     
-    public PanelProfessores(DAOprofessor listaProfessores) {
+    public PanelProfessores(ProfessorDAO listaProfessores) {
         this.tableModel = new tableModel();
         initComponents();
         this.listaProfessores = listaProfessores; 

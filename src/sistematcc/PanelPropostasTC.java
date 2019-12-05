@@ -1,5 +1,5 @@
 package sistematcc;
-import DAO.DAOpropostaTC;
+import DAO.PropostaTCDAO;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import models.PropostaTC;
@@ -7,9 +7,9 @@ import models.tableModelPropostas;
 
 public class PanelPropostasTC extends javax.swing.JPanel {
     private tableModelPropostas tableModelPropostas;
-    private DAOpropostaTC listaPropostas;
+    private PropostaTCDAO listaPropostas;
     
-    public PanelPropostasTC(DAOpropostaTC listaPropostas) {
+    public PanelPropostasTC(PropostaTCDAO listaPropostas) {
         this.tableModelPropostas = new tableModelPropostas();
         initComponents();
         this.listaPropostas = listaPropostas; 

@@ -29,13 +29,15 @@ public class PanelWhoAmI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        souAluno = new javax.swing.JButton();
+        crudProfessores = new javax.swing.JButton();
         souProfessor = new javax.swing.JButton();
+        souAluno1 = new javax.swing.JButton();
+        crudAlunos = new javax.swing.JButton();
 
-        souAluno.setText("Sou Aluno");
-        souAluno.addActionListener(new java.awt.event.ActionListener() {
+        crudProfessores.setText("CRUD Professores");
+        crudProfessores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                souAlunoActionPerformed(evt);
+                crudProfessoresActionPerformed(evt);
             }
         });
 
@@ -46,46 +48,95 @@ public class PanelWhoAmI extends javax.swing.JPanel {
             }
         });
 
+        souAluno1.setText("Sou Aluno");
+        souAluno1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                souAluno1ActionPerformed(evt);
+            }
+        });
+
+        crudAlunos.setText("CRUD Alunos");
+        crudAlunos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crudAlunosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(87, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(souProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(souAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(souAluno1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(souProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(82, 82, 82))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(crudProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(43, 43, 43)
+                    .addComponent(crudAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(277, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(souAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(souAluno1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(souProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(crudProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(293, Short.MAX_VALUE)
+                    .addComponent(crudAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(49, 49, 49)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void souAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_souAlunoActionPerformed
+    private void crudProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudProfessoresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_souAlunoActionPerformed
+    }//GEN-LAST:event_crudProfessoresActionPerformed
 
     private void souProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_souProfessorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_souProfessorActionPerformed
 
+    private void souAluno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_souAluno1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_souAluno1ActionPerformed
+
+    private void crudAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crudAlunosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crudAlunosActionPerformed
+
     public JButton getSouAluno() {
-        return souAluno;
+        return souProfessor;
     }
 
     public JButton getSouProfessor() {
         return souProfessor;
     }
 
+    public JButton getCrudAlunos() {
+        return crudAlunos;
+    }
+
+    public JButton getCrudProfessores() {
+        return crudProfessores;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton souAluno;
+    private javax.swing.JButton crudAlunos;
+    private javax.swing.JButton crudProfessores;
+    private javax.swing.JButton souAluno1;
     private javax.swing.JButton souProfessor;
     // End of variables declaration//GEN-END:variables
 }

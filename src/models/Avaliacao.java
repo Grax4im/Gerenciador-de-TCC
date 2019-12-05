@@ -1,5 +1,6 @@
 package models;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 public class Avaliacao implements Serializable{
     private Aluno aluno;
@@ -9,6 +10,7 @@ public class Avaliacao implements Serializable{
     private String parecer;
     private boolean avaliacao;
     private String conceito;
+    public static ArrayList<Avaliacao> listaAvaliacoes = new ArrayList();
 
     public Avaliacao(PropostaTC proposta,Professor avaliador, boolean avaliacao) {
         this.aluno = proposta.getAutor();
